@@ -38,6 +38,10 @@ const Navbar = () => {
               <Link to="/register">Register</Link> {/* Link to register page */}
             </div>
           )}
+          <div>
+            <Link to="/gameboard">Game Board</Link>
+          </div>
+          
         </nav>
       </div>
     </header>

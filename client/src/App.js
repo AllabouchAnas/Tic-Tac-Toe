@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Login from './components/authentication/pages/Login';
 import Register from './components/authentication/pages/Register';
 import Navbar from './components/Navbar';
+import GameBoard from './components/game/board/GameBoard'
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
             <Route 
               path="/register" 
               element={<Register />} 
+            />
+            {/* Route for the game board page */}
+            <Route 
+              path="/gameboard" 
+              element={<GameBoard />} 
             />
           </Routes>
         </div>

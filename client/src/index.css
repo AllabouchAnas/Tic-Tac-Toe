@@ -1,13 +1,54 @@
+/* Resetting default margin and setting font family for better cross-platform consistency */
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased; /* Smooth font rendering for WebKit browsers */
+  -moz-osx-font-smoothing: grayscale;  /* Smooth font rendering for macOS */
 }
 
+/* Specifying font family for code elements */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Styling for individual squares in the tic-tac-toe game */
+.square {
+  background: #fff; /* White background */
+  border: 1px solid #999; /* Solid border */
+  float: left; /* Floating squares to align them horizontally */
+  font-size: 24px; /* Font size */
+  font-weight: bold; /* Bold font */
+  line-height: 34px; /* Line height for vertical alignment */
+  height: 34px; /* Height of the square */
+  margin-right: -1px; /* Adjusting margins to remove gaps between squares */
+  margin-top: -1px;
+  padding: 0; /* Removing default padding */
+  text-align: center; /* Centering text */
+  width: 34px; /* Width of the square */
+}
+
+/* Clearing floats for each row of the game board */
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+/* Margin for the status element */
+.status {
+  margin-bottom: 10px;
+}
+
+/* Flexbox layout for the game */
+.game {
+  display: flex; /* Using flexbox */
+  flex-direction: row; /* Arranging items horizontally */
+}
+
+/* Margin for the game information */
+.game-info {
+  margin-left: 20px; /* Adding margin for spacing */
 }
