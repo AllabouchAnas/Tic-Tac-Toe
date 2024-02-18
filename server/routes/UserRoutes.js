@@ -1,13 +1,19 @@
+// Importing the Express framework
 const express = require('express');
+
+// Creating a router instance
 const router = express.Router();
 
-//Controller functions
+// Importing controller functions for user authentication
 const { loginUser, registerUser } = require('../controllers/UserController');
 
-// Login Route
+// Defining routes
+
+// Route for user login
 router.post('/login', loginUser);
 
-// Register Route
+// Route for user registration
 router.post('/register', registerUser);
 
-module.exports = router
+// Exporting the router module
+module.exports = router;
