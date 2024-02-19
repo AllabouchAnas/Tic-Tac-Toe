@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/authentication/pages/Login';
 import Register from './components/authentication/pages/Register';
-import Navbar from './components/Navbar';
+import Navbar from './components/menu/Navbar';
 import GameBoard from './components/game/board/GameBoard'
 
 function App() {
