@@ -1,126 +1,98 @@
-import { useState } from 'react';
+import React, { useRef, useState } from 'react'
+import './GameBoard.css'
+import circle_icon from '../../../../public/img/circle.png'
+import cross_icon from '../../../../public/img/cross.png'
 
-// Component for rendering individual square
-function Square({ value, onSquareClick }) {
-  return (
-    <button className="square" onClick={onSquareClick}>
-      {value}
-    </button>
-  );
-}
+let data = ["", "", "", "", "", "", "", "", ""]
 
-// Component for rendering the game board
-function Board({ xIsNext, squares, onPlay }) {
-  // Function to handle click on a square
-  function handleClick(i) {
-    if (calculateWinner(squares) || squares[i]) {
-      return;
+const GameBord = () => {
+  let [count, setCount] = useState(0);
+  let [lock, setLock] = useState(false);
+  let titleRef = useRef(null);
+
+  const toggle = (e,num) => {
+    if (lock) {
+      return 0
     }
-    const nextSquares = squares.slice();
-    if (xIsNext) {
-      nextSquares[i] = 'X';
+    if (count % 2 === 0) {
+      e.target.innerHTML = `<img src='${cross_icon}'>`
+      data[num] = "x";
+      setCount(++count)
+    }else {
+      e.target.innerHTML = `<img src='${circle_icon}'>`
+      data[num] = "o";
+      setCount(++count)
+    }
+    checkWin()
+  }
+
+  const checkWin = () => {
+    if (data[0]===data[1] && data[1]===data[2] && data[2]!=="") {
+      won(data[2]);
+    }
+    else if (data[3]===data[4] && data[4]===data[5] && data[5]!=="") {
+      won(data[5]);
+    }
+    else if (data[6]===data[7] && data[7]===data[8] && data[8]!=="") {
+      won(data[8]);
+    }
+    else if (data[0]===data[3] && data[3]===data[6] && data[6]!=="") {
+      won(data[6]);
+    }
+    else if (data[1]===data[4] && data[4]===data[7] && data[7]!=="") {
+      won(data[7]);
+    }
+    else if (data[2]===data[5] && data[5]===data[8] && data[8]!=="") {
+      won(data[8]);
+    }
+    else if (data[0]===data[4] && data[4]===data[8] && data[8]!=="") {
+      won(data[8]);
+    }
+    else if (data[2]===data[4] && data[4]===data[6] && data[6]!=="") {
+      won(data[6]);
+    }
+  }
+
+  const won = (winner) => {
+    setLock(true)
+    if (winner==="x") {
+      titleRef.current.innerHTML = `Congratulations: <img src='${cross_icon}'> Wins`
     } else {
-      nextSquares[i] = 'O';
+      titleRef.current.innerHTML = `Congratulations: <img src='${circle_icon}'> Wins`
     }
-    onPlay(nextSquares);
   }
 
-  // Determine the winner or next player
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = 'Winner: ' + winner;
-  } else {
-    status = 'Next player: ' + (xIsNext ? 'X' : 'O');
+  const reset = () => {
+    setLock(false)
+    data = ["", "", "", "", "", "", "", "", ""]
+    titleRef.current.innerHTML = "Tic Tac Toe"
+    const boxes = document.querySelectorAll('.box');
+    boxes.forEach(box => box.innerHTML = "");
   }
 
-  // Render the game board
   return (
-    <>
-      <div className="status">{status}</div>
-      <div className="board-row">
-        <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-        <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+    <div className='container'>
+      <h1 className='title' ref={titleRef}>Tic Tac Toe</h1>
+      <div className='board'>
+        <div className='row1'>
+          <div className='box' onClick={(e) => {toggle(e,0)}}></div>
+          <div className='box' onClick={(e) => {toggle(e,1)}}></div>
+          <div className='box' onClick={(e) => {toggle(e,2)}}></div>
+        </div>
+        <div className='row2'>
+          <div className='box' onClick={(e) => {toggle(e,3)}}></div>
+          <div className='box' onClick={(e) => {toggle(e,4)}}></div>
+          <div className='box' onClick={(e) => {toggle(e,5)}}></div>
+        </div>
+        <div className='row3'>
+          <div className='box' onClick={(e) => {toggle(e,6)}}></div>
+          <div className='box' onClick={(e) => {toggle(e,7)}}></div>
+          <div className='box' onClick={(e) => {toggle(e,8)}}></div>
+        </div>
       </div>
-      <div className="board-row">
-        <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-        <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-        <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-      </div>
-      <div className="board-row">
-        <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-        <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-        <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
-      </div>
-    </>
-  );
-}
-
-// Component for rendering the game and managing state
-export default function GameBoard() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
-  const [currentMove, setCurrentMove] = useState(0);
-  const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
-
-  // Function to handle a play
-  function handlePlay(nextSquares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-    setHistory(nextHistory);
-    setCurrentMove(nextHistory.length - 1);
-  }
-
-  // Function to jump to a specific move
-  function jumpTo(nextMove) {
-    setCurrentMove(nextMove);
-  }
-
-  // Generate moves list
-  const moves = history.map((squares, move) => {
-    let description;
-    if (move > 0) {
-      description = 'Go to move #' + move;
-    } else {
-      description = 'Go to game start';
-    }
-    return (
-      <li key={move}>
-        <button onClick={() => jumpTo(move)}>{description}</button>
-      </li>
-    );
-  });
-
-  // Render the game
-  return (
-    <div className="game">
-      <div className="game-board">
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
-      </div>
-      <div className="game-info">
-        <ol>{moves}</ol>
-      </div>
+      <button className='reset' onClick={() => {reset()}}>Reset</button>
     </div>
-  );
+  )
 }
 
-// Function to calculate the winner
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return null;
-}
+export default GameBord
