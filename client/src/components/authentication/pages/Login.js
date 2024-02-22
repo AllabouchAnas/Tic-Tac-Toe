@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin"; 
+import './Auth.css'
 
 // Component for user login
 const Login = () => {
@@ -17,24 +18,24 @@ const Login = () => {
 
     // Render the login form
     return (
-        <form className="register" onSubmit={ handleSubmit }>
-            <h3>Login:</h3>
+        <form className="login" onSubmit={ handleSubmit }>
+            <h1>Login:</h1>
 
             {/* Input field for email */}
-            <label>Email:</label>
             <input 
                 type="text"  
                 onChange={(e) => setEmail(e.target.value)} // Update email state on change
+                placeholder="Username"
                 value={email} // Set email value from state
             />
 
             <br/>
 
             {/* Input field for password */}
-            <label>Password:</label>
             <input 
                 type="password"  
                 onChange={(e) => setPassword(e.target.value)} // Update password state on change
+                placeholder="Password"
                 value={password} // Set password value from state
             />
 

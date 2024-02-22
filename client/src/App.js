@@ -4,8 +4,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Login from './components/authentication/pages/Login';
 import Register from './components/authentication/pages/Register';
-import Navbar from './components/menu/Navbar';
+import SideBar from './components/menu/SideBar';
 import GameBoard from './components/game/board/GameBoard'
+import GameOnline from './components/game/online/GameOnline'
+
 
 function App() {
   return (
@@ -13,7 +15,7 @@ function App() {
       {/* Set up BrowserRouter for routing */}
       <BrowserRouter>
         {/* Include the Navbar component for navigation */}
-        <Navbar />
+        <SideBar />
         <div className="pages">
           {/* Define routes for different pages */}
           <Routes>
@@ -36,6 +38,10 @@ function App() {
             <Route 
               path="/gameboard" 
               element={<GameBoard />} 
+            />
+            <Route 
+              path="/gameonline" 
+              element={<GameOnline />} 
             />
           </Routes>
         </div>

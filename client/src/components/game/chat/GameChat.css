@@ -1,0 +1,51 @@
+/* GameChat.css */
+.chat {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 300px; /* Adjust as needed */
+    height: 400px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+}
+
+.chatMessages {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.message {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}
+
+.chatInput {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.chatInput input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 5px;
+    outline: none;
+}
+
+.chatInput button {
+    padding: 8px 15px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.chatInput button:hover {
+    background-color: #0056b3;
+}

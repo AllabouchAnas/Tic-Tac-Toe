@@ -71,7 +71,7 @@ const GameBord = () => {
   }
 
   return (
-    <div className='container'>
+    <div className='boardContainer'>
       <h1 className='title' ref={titleRef}>Tic Tac Toe</h1>
       <div className='board'>
         <div className='row1'>

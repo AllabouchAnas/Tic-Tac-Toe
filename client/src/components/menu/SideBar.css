@@ -1,0 +1,60 @@
+.sidebar {
+    background-color: #0f1B21; /* Dark background color */
+    color: #fff; /* Light text color */
+    width: 300px; /* Set the width of the sidebar */
+    height: 100%; /* Make the sidebar full height */
+    position: fixed; /* Fix the position of the sidebar */
+    top: 0; /* Position it at the top */
+    left: 0; /* Position it at the left */
+    overflow-y: auto; /* Add scrolling if content exceeds height */
+    border-right: 2px solid #fff; /* Add a white border to the right side */
+  }
+  
+  .logo {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    font-size: 24px; /* Increase the font size */
+    font-weight: bold; /* Make the font bold */
+    margin-bottom: 20px; /* Add some margin at the bottom */
+    text-align: center; /* Center-align the text */
+    letter-spacing: 2px; /* Add some letter spacing for better readability */
+  }
+  
+  .user-info,
+  .auth-links,
+  .sidebar-links {
+    margin-top: auto; /* Push the auth links to the bottom */
+  }
+  
+  .user-info button {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .user-info button:hover {
+    text-decoration: underline;
+  }
+  
+  .auth-links a,
+  .sidebar-links a {
+    display: block;
+    margin-bottom: 10px;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 50px; /* Adjust padding for a more comfortable button-like feel */
+    border: 2px solid transparent; /* Increase border width for a more prominent look */
+    border-radius: 5px; /* Add border radius for rounded corners */
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* Add transition effect for smoother interaction */
+  }
+  
+  .auth-links a:hover,
+  .sidebar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Change background color on hover */
+    border-color: #fff; /* Change border color on hover */
+    transform: scale(1.05); /* Scale up the link slightly on hover for a subtle interactive effect */
+    text-decoration: none; /* Remove underline on hover */
+  }
+  

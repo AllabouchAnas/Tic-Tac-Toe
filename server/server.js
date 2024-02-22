@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 require('dotenv').config(); 
 const UserRoutes = require('./routes/UserRoutes');
+import "reflect-metadata";
 
 // Express App
 const app = express();
