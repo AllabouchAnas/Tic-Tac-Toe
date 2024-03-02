@@ -26,18 +26,8 @@
   .sidebar-links {
     margin-top: auto; /* Push the auth links to the bottom */
   }
-  
-  .user-info button {
-    background-color: transparent;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-  }
-  
-  .user-info button:hover {
-    text-decoration: underline;
-  }
-  
+
+  .user-info a,
   .auth-links a,
   .sidebar-links a {
     display: block;
@@ -50,6 +40,7 @@
     transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease; /* Add transition effect for smoother interaction */
   }
   
+  .user-info a:hover,
   .auth-links a:hover,
   .sidebar-links a:hover {
     background-color: rgba(255, 255, 255, 0.1); /* Change background color on hover */

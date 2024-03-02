@@ -65,6 +65,7 @@ const GameBord = () => {
   const reset = () => {
     setLock(false)
     data = ["", "", "", "", "", "", "", "", ""]
+    setCount(0);
     titleRef.current.innerHTML = "Tic Tac Toe"
     const boxes = document.querySelectorAll('.box');
     boxes.forEach(box => box.innerHTML = "");

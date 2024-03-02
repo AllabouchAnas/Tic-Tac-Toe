@@ -32,11 +32,12 @@ const SideBar = () => {
         </div>
         {user ? (
           <div className="user-info">
-            <FaUser />
-            <span>{user.email}</span>
-            <button onClick={handleLogout}>
+            <Link to="/profile">
+            <FaUser /> {user.email}
+            </Link>
+            <Link to="#" onClick={handleLogout}>
               <FaSignOutAlt /> Logout
-            </button>
+            </Link>
           </div>
         ) : (
           <div className="auth-links">
