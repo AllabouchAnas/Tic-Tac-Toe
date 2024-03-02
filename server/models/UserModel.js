@@ -8,20 +8,21 @@ const Schema = mongoose.Schema;
 
 // Defining the user schema
 const userSchema = new Schema({
-    email: { type: String, required: true, unique: true }, // Email field with required and unique constraints
-    password: { type: String, required: true } // Password field with required constraint
+    username: { type: String, required: true, unique: true }, // username field with required and unique constraints
+    password: { type: String, required: true }, // Password field with required constraint
+    score: { type: Number, default: 400 } // Score field with a default value of 400
 });
 
 // Static login method for the user schema
-userSchema.statics.login = async function(email, password) {
-    // Validation to ensure both email and password are provided
-    if(!email || !password) throw new Error('All fields are required!');
+userSchema.statics.login = async function(username, password) {
+    // Validation to ensure both username and password are provided
+    if(!username || !password) throw new Error('All fields are required!');
 
-    // Finding the user by email
-    const user = await this.findOne({ email });    
+    // Finding the user by username
+    const user = await this.findOne({ username });    
 
     // Error handling if user is not found
-    if(!user) throw new Error('Invalid email!');
+    if(!user) throw new Error('Invalid username!');
 
     // Comparing the provided password with the hashed password stored in the database
     const match  = await bcrypt.compare(password, user.password);
@@ -33,18 +34,18 @@ userSchema.statics.login = async function(email, password) {
 }
 
 // Static register method for the user schema
-userSchema.statics.register = async function(email, password) {
-    // Validation to ensure both email and password are provided
-    if(!email || !password) throw new Error('All fields are required!');
+userSchema.statics.register = async function(username, password) {
+    // Validation to ensure both username and password are provided
+    if(!username || !password) throw new Error('All fields are required!');
 
-    // Validating email format using validator
-    if(!validator.isEmail(email)) throw new Error('Email is not valid!');
+    // Validating username format using validator
+    // if(!validator.isEmail(username)) throw new Error('username is not valid!');
 
     // Validating password strength using validator
     if(!validator.isStrongPassword(password)) throw new Error('Password is not strong enough!');
 
     // Checking if the user already exists
-    const exists = await this.findOne({ email });
+    const exists = await this.findOne({ username });
     if(exists) throw new Error('User already exists!');
 
     // Generating salt and hashing the password
@@ -52,7 +53,7 @@ userSchema.statics.register = async function(email, password) {
     const hash = await bcrypt.hash(password, salt);
 
     // Creating a new user with the hashed password
-    const user = await this.create({ email, password: hash });
+    const user = await this.create({ username, password: hash });
     return user; // Returning the newly created user
 }
 

@@ -7,6 +7,7 @@ import Register from './components/authentication/pages/Register';
 import SideBar from './components/menu/SideBar';
 import GameBoard from './components/game/board/GameBoard'
 import GameOnline from './components/game/online/GameOnline'
+import LeaderBoard from './components/leaderBoard/LeaderBord';
 
 
 function App() {
@@ -23,6 +24,10 @@ function App() {
             <Route 
               path="/"
               element={<Home />}
+            />
+            <Route 
+              path="/leaderboard"
+              element={<LeaderBoard />}
             />
             {/* Route for the login page */}
             <Route 

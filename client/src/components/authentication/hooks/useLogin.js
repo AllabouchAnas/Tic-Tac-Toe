@@ -11,7 +11,7 @@ export const useLogin = () => {
     const { dispatch } = useAuthContext();
 
     // Function to handle user login
-    const login = async (email, password) => {
+    const login = async (username, password) => {
         setIsLoading(true); // Set loading state
         setError(null); // Clear previous error
 
@@ -19,7 +19,7 @@ export const useLogin = () => {
         const response = await fetch('/api/user/login', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ username, password })
         });
 
         const json = await response.json(); // Extract JSON response
