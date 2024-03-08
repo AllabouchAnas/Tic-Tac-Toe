@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin"; 
 import './Auth.css'
+import { Navigate } from 'react-router-dom';
+
 
 // Component for user login
 const Login = () => {
@@ -13,7 +15,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
 
-        await login(username, password); // Call the login function from the useLogin hook
+        const success = await login(username, password); // Call the login function from the useLogin hook
     }
 
     // Render the login form

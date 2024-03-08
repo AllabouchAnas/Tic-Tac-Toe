@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
-import '../board/GameBoard.css'
-import circle_icon from '../../../../public/img/circle.png'
-import cross_icon from '../../../../public/img/cross.png'
+import './GameOnline.css'
+import circle_icon from '../../../img/circle.png'
+import cross_icon from '../../../img/cross.png'
 import io from 'socket.io-client';
 
 
