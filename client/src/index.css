@@ -1,17 +1,44 @@
-/* Resetting default margin and setting font family for better cross-platform consistency */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased; /* Smooth font rendering for WebKit browsers */
-  -moz-osx-font-smoothing: grayscale;  /* Smooth font rendering for macOS */
   background: #0f1B21;
-  /* background: #34495e; */
+  color: #fff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Specifying font family for code elements */
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.button-container {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* Display buttons in a column */
+  align-items: center;
+}
+
+.play-online, .play-computer {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px; /* Increased padding for better visual appearance */
+  margin: 5px;
+  border-radius: 8px; /* Increased border radius for smoother edges */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+.play-online:hover, .play-computer:hover {
+  background-color: #0056b3;
+}
+
+.play-computer {
+  background-color: #555; /* Changed color for "Play Computer" button */
+}
+
+.play-computer:hover {
+  background-color: #333; /* Darker color on hover for "Play Computer" button */
 }

@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importing controller functions for user authentication
-const { loginUser, registerUser } = require('../controllers/UserController');
+const { loginUser, registerUser, leaderBoard } = require('../controllers/UserController');
 
 // Defining routes
 
@@ -14,6 +14,8 @@ router.post('/login', loginUser);
 
 // Route for user registration
 router.post('/register', registerUser);
+
+router.post('/leaderboard', leaderBoard);
 
 // Exporting the router module
 module.exports = router;

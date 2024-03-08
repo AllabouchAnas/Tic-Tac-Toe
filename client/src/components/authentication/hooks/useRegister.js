@@ -11,7 +11,7 @@ export const useRegister = () => {
     const { dispatch } = useAuthContext();
 
     // Function to handle user registration
-    const register = async (email, password) => {
+    const register = async (username, password) => {
         setIsLoading(true); // Set loading state
         setError(null); // Clear previous error
 
@@ -19,7 +19,7 @@ export const useRegister = () => {
         const response = await fetch('/api/user/register', {
             method: "POST",
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ username, password })
         });
 
         const json = await response.json(); // Extract JSON response

@@ -1,53 +1,74 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+  import { BrowserRouter, Routes, Route, Navigate  } from 'react-router-dom';
 
-// Import components and pages
-import Home from './components/Home';
-import Login from './components/authentication/pages/Login';
-import Register from './components/authentication/pages/Register';
-import SideBar from './components/menu/SideBar';
-import GameBoard from './components/game/board/GameBoard'
-import GameOnline from './components/game/online/GameOnline'
+  // Import components and pages
+  import Home from './components/Home';
+  import Login from './components/authentication/pages/Login';
+  import Register from './components/authentication/pages/Register';
+  import SideBar from './components/menu/SideBar';
+  import GameBoard from './components/game/board/GameBoard'
+  import GameOnline from './components/game/online/GameOnline'
+  import GameQueue from './components/game/online/GameQueue'
+  import LeaderBoard from './components/leaderBoard/LeaderBord';
+  import Profile from './components/profile/Profile';
+  import EditProfile from './components/profile/EditProfile';
 
+  function App() {
+    const isAuth = localStorage.getItem('user')
 
-function App() {
-  return (
-    <div className="App">
-      {/* Set up BrowserRouter for routing */}
-      <BrowserRouter>
-        {/* Include the Navbar component for navigation */}
-        <SideBar />
-        <div className="pages">
-          {/* Define routes for different pages */}
-          <Routes>
-            {/* Route for the home page */}
-            <Route 
-              path="/"
-              element={<Home />}
-            />
-            {/* Route for the login page */}
-            <Route 
-              path="/login" 
-              element={<Login />} 
-            />
-            {/* Route for the register page */}
-            <Route 
-              path="/register" 
-              element={<Register />} 
-            />
-            {/* Route for the game board page */}
-            <Route 
-              path="/gameboard" 
-              element={<GameBoard />} 
-            />
-            <Route 
-              path="/gameonline" 
-              element={<GameOnline />} 
-            />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
-  );
-}
+    return (
+      <div className="App">
+        {/* Set up BrowserRouter for routing */}
+        <BrowserRouter>
+          {/* Include the Navbar component for navigation */}
+          <SideBar />
+          <div className="pages">
+            {/* Define routes for different pages */}
+            <Routes>
+              {/* Route for the home page */}
+              <Route 
+                path="/"
+                element={<Home />}
+              />
+              <Route 
+                path="/leaderboard"
+                element={<LeaderBoard />}
+              />
+              {/* Route for the login page */}
+              <Route 
+                path="/login" 
+                element={isAuth ? <Navigate to="/" /> : <Login />}
+              />
+              {/* Route for the register page */}
+              <Route 
+                path="/register" 
+                element={isAuth ? <Navigate to="/" /> : <Register />} 
+              />
+              {/* Route for the game board page */}
+              <Route 
+                path="/gameboard" 
+                element={<GameBoard />} 
+              />
+              <Route 
+                path="/gameonline" 
+                element={!isAuth ? <Navigate to="/login" /> : <GameOnline />} 
+              />
+              <Route 
+                path="/gamequeue" 
+                element={!isAuth ? <Navigate to="/login" /> : <GameQueue />} 
+              />
+              <Route 
+                path="/profile" 
+                element={!isAuth ? <Navigate to="/login" /> : <Profile />} 
+              />
+              <Route 
+                path="/editprofile" 
+                element={!isAuth ? <Navigate to="/login" /> : <EditProfile />} 
+              />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </div>
+    );
+  }
 
-export default App;
+  export default App;

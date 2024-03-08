@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import './GameBoard.css'
-import circle_icon from '../../../../public/img/circle.png'
-import cross_icon from '../../../../public/img/cross.png'
+import circle_icon from '../../../img/circle.png'
+import cross_icon from '../../../img/cross.png'
 
 let data = ["", "", "", "", "", "", "", "", ""]
 
@@ -65,6 +65,7 @@ const GameBord = () => {
   const reset = () => {
     setLock(false)
     data = ["", "", "", "", "", "", "", "", ""]
+    setCount(0);
     titleRef.current.innerHTML = "Tic Tac Toe"
     const boxes = document.querySelectorAll('.box');
     boxes.forEach(box => box.innerHTML = "");

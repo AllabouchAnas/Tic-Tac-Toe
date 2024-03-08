@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaGamepad, FaUserFriends } from 'react-icons/fa';
+import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaGamepad, FaUserFriends, FaTrophy } from 'react-icons/fa';
 import { useLogout } from '../authentication/hooks/useLogout';
 import { useAuthContext } from '../authentication/hooks/useAuthContext';
 import './SideBar.css';
@@ -23,6 +23,9 @@ const SideBar = () => {
           <Link to="/">
             <FaHome /> Home
           </Link>
+          <Link to="/leaderboard">
+            <FaTrophy /> Leader Board
+          </Link>
           <Link to="/gameboard">
             <FaGamepad /> Game Board
           </Link>
@@ -32,11 +35,12 @@ const SideBar = () => {
         </div>
         {user ? (
           <div className="user-info">
-            <FaUser />
-            <span>{user.email}</span>
-            <button onClick={handleLogout}>
+            <Link to="/profile">
+            <FaUser /> {user.username.toUpperCase()}
+            </Link>
+            <Link to="#" onClick={handleLogout}>
               <FaSignOutAlt /> Logout
-            </button>
+            </Link>
           </div>
         ) : (
           <div className="auth-links">

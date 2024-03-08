@@ -12,18 +12,18 @@ const createToken = (_id) => {
 
 // Login Controller
 const loginUser = async (req, res) => {
-    // Destructuring email and password from the request body
-    const { email, password } = req.body;
+    // Destructuring username and password from the request body
+    const { username, password } = req.body;
 
     try {
         // Attempting to log in the user
-        const user = await User.login(email, password);
+        const user = await User.login(username, password);
 
         // Creating a token for the user
         const token = createToken(user._id);
 
-        // Sending the email and token in the response
-        res.status(200).json({ email, token });
+        // Sending the username and token in the response
+        res.status(200).json({ username, token });
     } catch (error) {
         // Handling errors if login fails
         res.status(400).json({ error: error.message });
@@ -32,26 +32,40 @@ const loginUser = async (req, res) => {
 
 // Register Controller
 const registerUser = async (req, res) => {
-    // Destructuring email and password from the request body
-    const { email, password } = req.body;
+    // Destructuring username and password from the request body
+    const { username, password } = req.body;
 
     try {
         // Attempting to register the user
-        const user = await User.register(email, password);
+        const user = await User.register(username, password);
 
         // Creating a token for the user
         const token = createToken(user._id);
 
-        // Sending the email and token in the response
-        res.status(200).json({ email, token });
+        // Sending the username and token in the response
+        res.status(200).json({ username, token });
     } catch (error) {
         // Handling errors if registration fails
         res.status(400).json({ error: error.message });
     }
 }
 
+const leaderBoard = async (req, res) => {
+    try {
+        // Fetch leaderboard data from the database, you would need to adjust this based on your schema
+        const leaderboardData = await User.find({}, { 'username': 1, 'score': 1}).sort({ score: -1 }).limit(10);
+        
+        // Send the leaderboard data in the response
+        res.status(200).json(leaderboardData);
+    } catch (error) {
+        // Handle errors if fetching leaderboard data fails
+        res.status(500).json({ error: 'Internal server error' });
+    }
+}
+
 // Exporting the login and register controller functions
 module.exports = {
     loginUser,
-    registerUser
+    registerUser,
+    leaderBoard
 }

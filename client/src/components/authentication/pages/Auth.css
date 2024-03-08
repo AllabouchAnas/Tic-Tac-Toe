@@ -57,3 +57,7 @@
 .login button:hover {
     border-color: #2ecc71;
 }
+
+.error {
+    color: red;
+}

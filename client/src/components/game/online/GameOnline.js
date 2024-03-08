@@ -1,28 +1,65 @@
-import React, { useRef, useState } from 'react'
-import '../board/GameBoard.css'
-import circle_icon from '../../../../public/img/circle.png'
-import cross_icon from '../../../../public/img/cross.png'
+import React, { useRef, useState, useEffect } from 'react'
+import './GameOnline.css'
+import circle_icon from '../../../img/circle.png'
+import cross_icon from '../../../img/cross.png'
+import io from 'socket.io-client';
 
-let data = ["", "", "", "", "", "", "", "", ""]
 
 const GameOnline = () => {
-  let [count, setCount] = useState(0);
-  let [lock, setLock] = useState(false);
-  let titleRef = useRef(null);
+  const [turn, setTurn] = useState(true);
+  const [tag, setTag] = useState('x');
+  const [lock, setLock] = useState(false);
+  const titleRef = useRef(null);
+  const [data, setData] = useState(["", "", "", "", "", "", "", "", ""])
+  const socket = useRef(null)
 
-  const toggle = (e,num) => {
-    if (lock) {
+  useEffect(() => {
+    // Connect to Socket.IO server
+    socket.current = io();
+
+    socket.current.on("num", (arg) => {
+      console.log(arg);
+      
+      console.log(arg.turn);
+        if(arg.tag === 'o') {
+          document.querySelector('.x' + arg.index).innerHTML = `<img src='${circle_icon}'>`
+          data[arg.index] = "o";
+          setTag('x')
+          setTurn(true)
+          localStorage.setItem('board', JSON.stringify(data));
+        }else {
+          document.querySelector('.x' + arg.index).innerHTML = `<img src='${cross_icon}'>`
+          data[arg.index] = "x";
+          setTag('o')
+          setTurn(true)
+          localStorage.setItem('board', JSON.stringify(data));
+        }
+      
+      console.log(data)
+    });
+
+    return () => {
+        // Disconnect from Socket.IO server when component unmounts
+        socket.current.disconnect();
+    };
+}, []);  
+
+  const toggle = (num) => {
+    if (lock || data[num]!=='' || !turn) {
       return 0
     }
-    if (count % 2 === 0) {
-      e.target.innerHTML = `<img src='${cross_icon}'>`
+    if (tag === 'x') {
+      document.querySelector('.x' + num).innerHTML = `<img src='${cross_icon}'>`
       data[num] = "x";
-      setCount(++count)
+      setTurn(false)
+      localStorage.setItem('board', JSON.stringify(data));
     }else {
-      e.target.innerHTML = `<img src='${circle_icon}'>`
+      document.querySelector('.x' + num).innerHTML = `<img src='${circle_icon}'>`
       data[num] = "o";
-      setCount(++count)
+      setTurn(false)
+      localStorage.setItem('board', JSON.stringify(data));
     }
+    socket.current.emit('num', {index: num, tag: data[num]});
     checkWin()
   }
 
@@ -64,10 +101,12 @@ const GameOnline = () => {
 
   const reset = () => {
     setLock(false)
-    data = ["", "", "", "", "", "", "", "", ""]
+    setData(["", "", "", "", "", "", "", "", ""])
+    setTurn(true)
     titleRef.current.innerHTML = "Tic Tac Toe"
     const boxes = document.querySelectorAll('.box');
     boxes.forEach(box => box.innerHTML = "");
+    localStorage.removeItem('board')
   }
 
   return (
@@ -75,19 +114,19 @@ const GameOnline = () => {
       <h1 className='title' ref={titleRef}>Tic Tac Toe</h1>
       <div className='board'>
         <div className='row1'>
-          <div className='box' onClick={(e) => {toggle(e,0)}}></div>
-          <div className='box' onClick={(e) => {toggle(e,1)}}></div>
-          <div className='box' onClick={(e) => {toggle(e,2)}}></div>
+          <div className='box x0' onClick={() => {toggle(0)}}></div>
+          <div className='box x1' onClick={() => {toggle(1)}}></div>
+          <div className='box x2' onClick={() => {toggle(2)}}></div>
         </div>
         <div className='row2'>
-          <div className='box' onClick={(e) => {toggle(e,3)}}></div>
-          <div className='box' onClick={(e) => {toggle(e,4)}}></div>
-          <div className='box' onClick={(e) => {toggle(e,5)}}></div>
+          <div className='box x3' onClick={() => {toggle(3)}}></div>
+          <div className='box x4' onClick={() => {toggle(4)}}></div>
+          <div className='box x5' onClick={() => {toggle(5)}}></div>
         </div>
         <div className='row3'>
-          <div className='box' onClick={(e) => {toggle(e,6)}}></div>
-          <div className='box' onClick={(e) => {toggle(e,7)}}></div>
-          <div className='box' onClick={(e) => {toggle(e,8)}}></div>
+          <div className='box x6' onClick={() => {toggle(6)}}></div>
+          <div className='box x7' onClick={() => {toggle(7)}}></div>
+          <div className='box x8' onClick={() => {toggle(8)}}></div>
         </div>
       </div>
       <button className='reset' onClick={() => {reset()}}>Reset</button>

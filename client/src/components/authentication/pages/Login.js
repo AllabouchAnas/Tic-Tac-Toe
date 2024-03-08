@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin"; 
 import './Auth.css'
+import { Navigate } from 'react-router-dom';
+
 
 // Component for user login
 const Login = () => {
-    // State variables for email, password, and login status
-    const [email, setEmail] = useState('');
+    // State variables for username, password, and login status
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const { login, error, isLoading } = useLogin(); // Use the useLogin hook for login functionality
 
@@ -13,7 +15,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
 
-        await login(email, password); // Call the login function from the useLogin hook
+        const success = await login(username, password); // Call the login function from the useLogin hook
     }
 
     // Render the login form
@@ -21,12 +23,12 @@ const Login = () => {
         <form className="login" onSubmit={ handleSubmit }>
             <h1>Login:</h1>
 
-            {/* Input field for email */}
+            {/* Input field for username */}
             <input 
                 type="text"  
-                onChange={(e) => setEmail(e.target.value)} // Update email state on change
+                onChange={(e) => setUsername(e.target.value)} // Update username state on change
                 placeholder="Username"
-                value={email} // Set email value from state
+                value={username} // Set username value from state
             />
 
             <br/>

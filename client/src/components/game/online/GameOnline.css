@@ -1,0 +1,64 @@
+.boardContainer {
+    text-align: center;
+    margin-top: 50px;
+    margin-left: -200px;
+}
+
+.title {
+    margin-top: 20px;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title img {
+    padding: 10px;
+    height: 30px;
+}
+
+.reset {
+    width: 180px;
+    height: 70px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 35px;
+    background: #1f3540;
+    font-size: 20px;
+    color: #26ffcb;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.box {
+    display: flex;
+    height: 140px;
+    width: 140px;
+    background: #1f3540;
+    border: 3px solid #0f1b21;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.box img {
+    margin: 30px;
+}
+
+.board {
+    height: 450px;
+    width: 424px;
+    display: flex;
+    margin: auto;
+}
+
+.game-queue{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh;
+}
+.game-queue p {
+    color: aliceblue;
+}

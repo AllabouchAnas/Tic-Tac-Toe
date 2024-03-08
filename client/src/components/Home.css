@@ -1,0 +1,41 @@
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.home-container img {
+    width: 500px; /* Adjust image width as needed */
+    height: 500px; /* Adjust image height as needed */
+    margin-left: 200px;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.play-online, .play-computer {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 20px 24px; /* Increased padding for better visual appearance */
+    margin: 15px;
+    border-radius: 8px; /* Increased border radius for smoother edges */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+    font-size: 18px; /* Adjust font size as needed */
+}
+
+.play-online:hover, .play-computer:hover {
+    background-color: #0056b3;
+}
+
+.play-computer {
+    background-color: #555; /* Changed color for "Play Computer" button */
+}
+
+.play-computer:hover {
+    background-color: #333; /* Darker color on hover for "Play Computer" button */
+}
