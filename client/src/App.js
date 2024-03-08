@@ -50,10 +50,6 @@
               />
               <Route 
                 path="/gameonline" 
-                element={!isAuth ? <Navigate to="/login" /> : <GameOnline />} 
-              />
-              <Route 
-                path="/gamequeue" 
                 element={!isAuth ? <Navigate to="/login" /> : <GameQueue />} 
               />
               <Route 
