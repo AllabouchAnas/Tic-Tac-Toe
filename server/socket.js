@@ -38,6 +38,11 @@ function socket(io) {
             console.log(arg)
         });
 
+        socket.on("message", (message) => {
+            console.log(message)
+            socket.to(message.room).emit('message', message);
+        });
+
         socket.on("disconnect", () => {
             console.log(`User disconnected with ID: ${socket.id}`);
 

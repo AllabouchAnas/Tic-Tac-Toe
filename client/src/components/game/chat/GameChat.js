@@ -1,14 +1,33 @@
-import React, { useState } from 'react';
-import './GameChat.css'
+import React, { useState, useEffect } from 'react';
+import './GameChat.css';
+import io from 'socket.io-client';
 
-const GameChat = () => {
+const GameChat = ({ room, user }) => {
+    const [socket, setSocket] = useState(null);
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState('');
 
+    useEffect(() => {
+        // Connect to Socket.IO server
+        const socket = io();
+        setSocket(socket);
+
+        socket.emit('joinRoom', room);
+
+        socket.on('message', (message) => {
+            console.log(message)
+            setMessages(prevMessages => [...prevMessages, message.message]);
+        });
+
+        return () => {
+            socket.disconnect();
+        };
+    }, []);
+
     const sendMessage = () => {
-        // Implement message sending logic (e.g., using sockets)
-        if (input.trim() !== '') {
-            // Here you can emit a socket event to send the message
+        if (input.trim() !== '' && socket) {
+            // Emit a socket event to send the message to the server
+            socket.emit('message', { message: input, room: room });
             setMessages(prevMessages => [...prevMessages, input]);
             setInput('');
         }

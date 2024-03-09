@@ -5,7 +5,7 @@ import cross_icon from '../../../img/cross.png';
 import io from 'socket.io-client';
 import GameChat from '../chat/GameChat';
 
-const GameOnline = ({ room }) => {
+const GameOnline = ({ room, user }) => {
   const [turn, setTurn] = useState(true);
   const [tag, setTag] = useState('x');
   const [lock, setLock] = useState(false);
@@ -16,11 +16,11 @@ const GameOnline = ({ room }) => {
   useEffect(() => {
     // Connect to Socket.IO server
     if (!socket.current) {
-      socket.current = io();
+      socket.current = user;
   }
 
 
-    socket.current.emit('joinRoom', room);
+    // socket.current.emit('joinRoom', room);
     console.log(room)
     socket.current.on("num", (arg) => {
       if(arg.tag === 'o') {
@@ -35,6 +35,7 @@ const GameOnline = ({ room }) => {
         setTurn(true);
       }
       console.log(arg)
+
       // Cleanup function for disconnecting socket
       return () => {
         socket.current.disconnect();
@@ -118,7 +119,7 @@ const GameOnline = ({ room }) => {
         </div>
       </div>
       <button className='reset' onClick={() => { reset() }}>Reset</button>
-      <GameChat />
+      <GameChat room={room} user={user} />
     </div>
   );
 };
