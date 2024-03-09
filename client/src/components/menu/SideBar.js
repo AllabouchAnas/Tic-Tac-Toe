@@ -4,6 +4,7 @@ import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaGamepad, FaUserFriends, Fa
 import { useLogout } from '../authentication/hooks/useLogout';
 import { useAuthContext } from '../authentication/hooks/useAuthContext';
 import './SideBar.css';
+import Logo from '../../img/logo.png'
 
 const SideBar = () => {
   const { logout } = useLogout();
@@ -17,7 +18,8 @@ const SideBar = () => {
     <header>
       <nav className="sidebar">
         <Link to="/" className="logo">
-          <h1>Tic Tac Toe</h1>
+          {/* <h1>Tic Tac Toe</h1> */}
+          <img src={ Logo }></img>
         </Link>
         <div className="sidebar-links">
           <Link to="/">
