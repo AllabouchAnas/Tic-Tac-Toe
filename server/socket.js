@@ -24,6 +24,11 @@ function socket(io) {
 
         socket.on("joinRoom", (room) => {
             const roomClients = io.sockets.adapter.rooms.get(room);
+            // if (roomClients && roomClients.size >= MAX_USERS_PER_ROOM) {
+            //     // Room is full, do not allow more users to join
+            //     socket.emit("roomFull");
+            //     return;
+            // }
             socket.join(room);
             console.log(`User ${socket.id} joined room ${room}`)
         });

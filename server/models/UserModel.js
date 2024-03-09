@@ -39,7 +39,8 @@ userSchema.statics.register = async function(username, password) {
     if(!username || !password) throw new Error('All fields are required!');
 
     // Validating username format using validator
-    // if(!validator.isEmail(username)) throw new Error('username is not valid!');
+    const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/; // Username must be alphanumeric with underscores and between 3 to 20 characters long
+    if(!usernameRegex.test(username)) throw new Error('Username is not valid!');
 
     // Validating password strength using validator
     if(!validator.isStrongPassword(password)) throw new Error('Password is not strong enough!');
