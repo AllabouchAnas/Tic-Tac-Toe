@@ -16,7 +16,7 @@
 .main {
     width: 40rem;
     height: 43rem;
-    background-color: #2c2c2c; /* Dark background color */
+    background-color: #1f3540; /* Dark background color */
     box-shadow: 0px 5px 15px 8px #111; /* Dark box shadow */
     display: flex;
     flex-direction: column;
@@ -63,13 +63,13 @@
 }
 
 .row:not(:first-child):hover {
-    background-color: #3c3c3c; /* Dark hover background color */
+    background-color: #2f5f77; /* Dark hover background color */
     transform: scale(1.1);
     box-shadow: 0px 5px 15px 8px #111; /* Dark box shadow */
 }
 
 .row:nth-child(odd) {
-    background-color: #333; /* Dark row background color */
+    background-color: #1a2c35; /* Dark row background color */
 }
 
 .row:nth-child(1) {

@@ -53,7 +53,7 @@ const registerUser = async (req, res) => {
 const leaderBoard = async (req, res) => {
     try {
         // Fetch leaderboard data from the database, you would need to adjust this based on your schema
-        const leaderboardData = await User.find({}, { 'username': 1, 'score': 1}).sort({ score: -1 }).limit(10);
+        const leaderboardData = await User.find({}, { 'username': 1, 'score': 1}).sort({ score: -1 }).limit(7);
         
         // Send the leaderboard data in the response
         res.status(200).json(leaderboardData);
