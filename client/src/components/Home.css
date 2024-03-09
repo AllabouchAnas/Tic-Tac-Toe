@@ -40,3 +40,21 @@
 .play-computer:hover {
     background-color: #333; /* Darker color on hover for "Play Computer" button */
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    color: #f8f9fa; 
+    text-align: right; 
+    padding-right: 70%; 
+}
+
+  .footer p {
+    font-size: 13px;
+  }
+
+  .footer a {
+    color: inherit;
+    font-weight: bold;
+}

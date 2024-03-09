@@ -13,6 +13,9 @@ const Home = () => {
                 <button className="play-online" onClick={() => window.location.href = "/gameonline"}><i className="fas fa-users"></i> Play Online</button>
                 <button className="play-computer" onClick={() => window.location.href = "/gamesolo"}><i className="fas fa-desktop"></i> Play Computer</button>
             </div>
+            <div className="footer">
+                <p>Copyright © 2024. Made with ❤️ by <a href='https://github.com/AllabouchAnas' target="_blank" rel="noreferrer">A&H</a></p>
+            </div>
         </div>
     )
 }
