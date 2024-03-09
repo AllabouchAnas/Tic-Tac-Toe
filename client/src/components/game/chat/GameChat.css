@@ -1,12 +1,18 @@
 /* GameChat.css */
+
 .chat {
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 2px solid #1f3540; /* Match the border color of GameOnline */
+    border-radius: 10px; /* Adjust as needed */
     padding: 10px;
     width: 300px; /* Adjust as needed */
     height: 400px; /* Adjust as needed */
     display: flex;
     flex-direction: column;
+    position: absolute;
+    top: 48%;
+    right: 15%;
+    transform: translateY(-50%);
+    background-color: #1f3540; /* Match the background color of GameOnline */
 }
 
 .chatMessages {
@@ -15,10 +21,11 @@
 }
 
 .message {
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    background-color: #f2f2f2;
-    border-radius: 5px;
+    margin-bottom: 10px; /* Increased margin for better separation */
+    padding: 8px 12px;
+    background-color: #222a2f; /* Match the message background color of GameOnline */
+    border-radius: 8px; /* Adjust as needed */
+    color: #ffffff; /* Match the text color of GameOnline */
 }
 
 .chatInput {
@@ -34,18 +41,21 @@
     border-radius: 5px;
     margin-right: 5px;
     outline: none;
+    background-color: #ffffff; /* Match the input background color of GameOnline */
+    color: #000000; /* Match the input text color of GameOnline */
 }
 
 .chatInput button {
     padding: 8px 15px;
     border: none;
-    background-color: #007bff;
-    color: white;
+    background-color: #3ad5b1;
+    color: #1a2f39;
     border-radius: 5px;
     cursor: pointer;
     outline: none;
 }
 
 .chatInput button:hover {
-    background-color: #0056b3;
+    background-color: #1a2f39;
+    color: #3ad5b1;
 }

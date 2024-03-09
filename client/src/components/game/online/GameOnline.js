@@ -3,6 +3,7 @@ import './GameOnline.css';
 import circle_icon from '../../../img/circle.png';
 import cross_icon from '../../../img/cross.png';
 import io from 'socket.io-client';
+import GameChat from '../chat/GameChat';
 
 const GameOnline = ({ room }) => {
   const [turn, setTurn] = useState(true);
@@ -117,6 +118,7 @@ const GameOnline = ({ room }) => {
         </div>
       </div>
       <button className='reset' onClick={() => { reset() }}>Reset</button>
+      <GameChat />
     </div>
   );
 };
