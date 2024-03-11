@@ -61,4 +61,15 @@
 }
 .game-queue p {
     color: aliceblue;
+    font-size: 40px;
+    margin-left: 200px;
+}
+
+.opponent {
+    margin-top: 0px;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

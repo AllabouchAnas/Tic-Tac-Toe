@@ -12,6 +12,8 @@ const GameOnline = ({ room, user }) => {
   const titleRef = useRef(null);
   const [data, setData] = useState(["", "", "", "", "", "", "", "", ""]);
   const socket = useRef(null);
+  const [player, setPlayer] = useState(JSON.parse(localStorage.getItem('user')).username);
+  const [opponent, setOpponent] = useState('');
 
   useEffect(() => {
     // Connect to Socket.IO server
@@ -19,9 +21,12 @@ const GameOnline = ({ room, user }) => {
       socket.current = user;
   }
 
-
+  socket.current.on('handShake', (arg) => {
+    setOpponent(arg)
+  });
+    socket.current.emit('handShake', {opp: player, room: room});
     // socket.current.emit('joinRoom', room);
-    console.log(room)
+    console.log(room, opponent)
     socket.current.on("num", (arg) => {
       if(arg.tag === 'o') {
         document.querySelector('.x' + arg.index).innerHTML = `<img src='${circle_icon}'>`;
@@ -35,6 +40,7 @@ const GameOnline = ({ room, user }) => {
         setTurn(true);
       }
       console.log(arg)
+      checkWin()
 
       // Cleanup function for disconnecting socket
       return () => {
@@ -118,7 +124,8 @@ const GameOnline = ({ room, user }) => {
           <div className='box x8' onClick={() => { toggle(8) }}></div>
         </div>
       </div>
-      <button className='reset' onClick={() => { reset() }}>Reset</button>
+      <h2 className='opponent'>{player} vs {opponent}</h2>
+      {/* <button className='reset' onClick={() => { reset() }}>Reset</button> */}
       <GameChat room={room} user={user} />
     </div>
   );
