@@ -4,6 +4,7 @@ import circle_icon from '../../../img/circle.png';
 import cross_icon from '../../../img/cross.png';
 import io from 'socket.io-client';
 import GameChat from '../chat/GameChat';
+import playSound from '../../../sounds/play.mp3'
 
 const GameOnline = ({ room, user }) => {
   const [turn, setTurn] = useState(true);
@@ -27,6 +28,12 @@ const GameOnline = ({ room, user }) => {
     socket.current.emit('handShake', {opp: player, room: room});
     // socket.current.emit('joinRoom', room);
     console.log(room, opponent)
+
+    socket.current.on("userLeft", (arg) => {
+      titleRef.current.innerHTML = "You win, Opponent left the game";
+      setLock(true);
+    });
+
     socket.current.on("num", (arg) => {
       if(arg.tag === 'o') {
         document.querySelector('.x' + arg.index).innerHTML = `<img src='${circle_icon}'>`;
@@ -62,6 +69,7 @@ const GameOnline = ({ room, user }) => {
       data[num] = "o";
       setTurn(false);
     }
+    new Audio(playSound).play();
     socket.current.emit('num', { index: num, tag: data[num], room: room });
     checkWin();
   };

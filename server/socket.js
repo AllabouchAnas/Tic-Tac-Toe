@@ -50,7 +50,7 @@ function socket(io) {
 
         socket.on("disconnect", () => {
             console.log(`User disconnected with ID: ${socket.id}`);
-
+            io.emit('userLeft', socket.id);
             if (queue.has(socket.id)) {
                 queue.delete(socket.id);
             }
