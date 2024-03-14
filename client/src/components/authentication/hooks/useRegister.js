@@ -6,7 +6,7 @@ export const useRegister = () => {
     // State variables for error handling and loading state
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(null);
-
+    const [redirect, setRedirect] = useState(false);
     // Access authentication context and dispatch function
     const { dispatch } = useAuthContext();
 
@@ -34,10 +34,11 @@ export const useRegister = () => {
 
             // Update authentication context with user data
             dispatch({ type: 'LOGIN', payload: json });
-            setIsLoading(false); // Set loading state to false
+            setIsLoading(false);
+            setRedirect(true); // Redirect to
         }
     };
 
     // Return register function, loading state, and error message
-    return { register, isLoading, error };
+    return { register, isLoading, error, redirect };
 };

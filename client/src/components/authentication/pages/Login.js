@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLogin } from "../hooks/useLogin"; 
 import './Auth.css'
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 // Component for user login
@@ -9,7 +9,8 @@ const Login = () => {
     // State variables for username, password, and login status
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login, error, isLoading } = useLogin(); // Use the useLogin hook for login functionality
+    const navigate = useNavigate();
+    const { login, error, isLoading, redirect } = useLogin(); // Use the useLogin hook for login functionality
 
     // Handle form submission for login
     const handleSubmit = async (e) => {
@@ -17,6 +18,12 @@ const Login = () => {
 
         const success = await login(username, password); // Call the login function from the useLogin hook
     }
+
+    useEffect(() => {
+        if (redirect) {
+            navigate('/'); // Redirect to home page
+        }
+    }, [redirect, navigate]);
 
     // Render the login form
     return (
