@@ -50,6 +50,47 @@ const registerUser = async (req, res) => {
     }
 }
 
+const getUser = async (req, res) => {
+    const username = req.body.username;
+
+    try {
+        // Attempting to fetch the user
+        const user = await User.findOne({ username: username });
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        // Sending the user data in the response
+        res.status(200).json(user);
+    } catch (error) {
+        // Handling errors if user retrieval fails
+        res.status(404).json({ error: error.message });
+    }
+}
+
+
+// editUser Controller
+const editUser = async (req, res) => {
+    const { oldUsername, newUsername, newPassword } = req.body;
+
+    try {
+        // Attempting to find the user by userId
+        const user = await User.edit(oldUsername, newUsername, newPassword);
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        // Sending the updated user data in the response
+        res.status(200).json(user);
+    } catch (error) {
+        // Handling errors if user editing fails
+        res.status(400).json({ error: error.message });
+    }
+}
+
+
 const leaderBoard = async (req, res) => {
     try {
         // Fetch leaderboard data from the database, you would need to adjust this based on your schema
@@ -67,5 +108,7 @@ const leaderBoard = async (req, res) => {
 module.exports = {
     loginUser,
     registerUser,
+    getUser,
+    editUser,
     leaderBoard
 }

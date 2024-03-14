@@ -1,0 +1,84 @@
+  .profile-card {
+    background-color: #1f3540; /* Changed background color */
+    border-radius: 20px;
+    padding: 100px; /* Adjusted padding */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+    width: 600px; /* Increased width */
+    position: absolute;
+    top: 25%;
+    left: 30%;
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+  }
+
+  .profile-info {
+    margin-left: 20px;
+  }
+
+  .profile-info h1 {
+    font-size: 2.2em; /* Increased font size */
+    margin-bottom: 10px; /* Increased margin */
+  }
+
+  .profile-info p {
+    font-size: 1.4em; /* Increased font size */
+    margin-bottom: 20px; /* Increased margin */
+  }
+
+  .edit-button {
+    position: absolute;
+    bottom: 20px; /* Increased bottom margin */
+    right: 20px; /* Increased right margin */
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px; /* Increased padding */
+    font-size: 1em; /* Increased font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .edit-button:hover {
+    background-color: #0056b3;
+  }
+
+  .score {
+    font-size: 1.4em; /* Increased font size */
+    background-color: #2980b9;
+    color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: auto; /* Adjusted margin */
+    margin-right: 20px; /* Adjusted margin */
+  }
+
+  .profile-picture {
+    width: 150px; /* Increased size */
+    height: 150px; /* Increased size */
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%; /* Ensures image is displayed as a circle */
+  }
+
+  .profile-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .tic-tac-toe-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 3em;
+    color: #ffffff;
+  }
