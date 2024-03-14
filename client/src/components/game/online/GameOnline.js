@@ -3,24 +3,37 @@ import './GameOnline.css';
 import circle_icon from '../../../img/circle.png';
 import cross_icon from '../../../img/cross.png';
 import io from 'socket.io-client';
+import GameChat from '../chat/GameChat';
+import playSound from '../../../sounds/play.mp3'
 
-const GameOnline = ({ room }) => {
+const GameOnline = ({ room, user }) => {
   const [turn, setTurn] = useState(true);
   const [tag, setTag] = useState('x');
   const [lock, setLock] = useState(false);
   const titleRef = useRef(null);
   const [data, setData] = useState(["", "", "", "", "", "", "", "", ""]);
   const socket = useRef(null);
+  const [player, setPlayer] = useState(JSON.parse(localStorage.getItem('user')).username);
+  const [opponent, setOpponent] = useState('');
 
   useEffect(() => {
     // Connect to Socket.IO server
     if (!socket.current) {
-      socket.current = io();
+      socket.current = user;
   }
 
+  socket.current.on('handShake', (arg) => {
+    setOpponent(arg)
+  });
+    socket.current.emit('handShake', {opp: player, room: room});
+    // socket.current.emit('joinRoom', room);
+    console.log(room, opponent)
 
-    socket.current.emit('joinRoom', room);
-    console.log(room)
+    socket.current.on("userLeft", (arg) => {
+      titleRef.current.innerHTML = "You win, Opponent left the game";
+      setLock(true);
+    });
+
     socket.current.on("num", (arg) => {
       if(arg.tag === 'o') {
         document.querySelector('.x' + arg.index).innerHTML = `<img src='${circle_icon}'>`;
@@ -34,6 +47,8 @@ const GameOnline = ({ room }) => {
         setTurn(true);
       }
       console.log(arg)
+      checkWin()
+
       // Cleanup function for disconnecting socket
       return () => {
         socket.current.disconnect();
@@ -54,6 +69,7 @@ const GameOnline = ({ room }) => {
       data[num] = "o";
       setTurn(false);
     }
+    new Audio(playSound).play();
     socket.current.emit('num', { index: num, tag: data[num], room: room });
     checkWin();
   };
@@ -116,7 +132,9 @@ const GameOnline = ({ room }) => {
           <div className='box x8' onClick={() => { toggle(8) }}></div>
         </div>
       </div>
-      <button className='reset' onClick={() => { reset() }}>Reset</button>
+      <h2 className='opponent'>{player} vs {opponent}</h2>
+      {/* <button className='reset' onClick={() => { reset() }}>Reset</button> */}
+      <GameChat room={room} user={user} />
     </div>
   );
 };

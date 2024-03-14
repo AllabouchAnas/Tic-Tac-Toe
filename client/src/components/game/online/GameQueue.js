@@ -28,7 +28,7 @@ function GameQueue() {
 
     // Render the GameOnline component if enough players have joined and a room name is available
     if (playersJoined >= 2 && roomName) {
-        return <GameOnline room={roomName} />;
+        return <GameOnline room={roomName} user={socket.current} />;
     } else {
         return (
             <div className='game-queue'>

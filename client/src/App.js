@@ -14,6 +14,7 @@
 
   function App() {
     const isAuth = localStorage.getItem('user')
+    
 
     return (
       <div className="App">

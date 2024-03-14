@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importing controller functions for user authentication
-const { loginUser, registerUser, leaderBoard } = require('../controllers/UserController');
+const { loginUser, registerUser, leaderBoard, getUser, editUser } = require('../controllers/UserController');
 
 // Defining routes
 
@@ -16,6 +16,10 @@ router.post('/login', loginUser);
 router.post('/register', registerUser);
 
 router.post('/leaderboard', leaderBoard);
+
+router.post('/getUser', getUser);
+
+router.post('/editUser', editUser);
 
 // Exporting the router module
 module.exports = router;

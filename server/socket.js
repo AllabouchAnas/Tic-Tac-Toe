@@ -22,6 +22,11 @@ function socket(io) {
             }
         });
 
+        socket.on("handShake", (arg)=> {
+            console.log("HandShake", arg)
+            socket.broadcast.to(arg.room).emit('handShake', arg.opp)
+        })
+
         socket.on("joinRoom", (room) => {
             const roomClients = io.sockets.adapter.rooms.get(room);
             // if (roomClients && roomClients.size >= MAX_USERS_PER_ROOM) {
@@ -38,9 +43,14 @@ function socket(io) {
             console.log(arg)
         });
 
+        socket.on("message", (message) => {
+            console.log(message)
+            socket.to(message.room).emit('message', message);
+        });
+
         socket.on("disconnect", () => {
             console.log(`User disconnected with ID: ${socket.id}`);
-
+            io.emit('userLeft', socket.id);
             if (queue.has(socket.id)) {
                 queue.delete(socket.id);
             }

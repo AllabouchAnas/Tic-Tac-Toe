@@ -58,5 +58,33 @@ userSchema.statics.register = async function(username, password) {
     return user; // Returning the newly created user
 }
 
+userSchema.statics.edit = async function(oldUsername, newUsername, newPassword) {
+    // Validation to ensure both username and password are provided
+    if (!newUsername || !newPassword) throw new Error('All fields are required!');
+
+    // Validating username format using validator
+    const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/; // Username must be alphanumeric with underscores and between 3 to 20 characters long
+    if (!usernameRegex.test(newUsername)) throw new Error('Username is not valid!');
+
+    // Validating password strength using validator
+    if (!validator.isStrongPassword(newPassword)) throw new Error('Password is not strong enough!');
+
+    // Checking if the user already exists
+    const user = await this.findOne({ username: oldUsername });
+    if (!user) throw new Error('User not found!');
+
+    // Generating salt and hashing the new password
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    user.username = newUsername;
+    user.password = hash;
+
+    await user.save(); // Save the changes to the user
+
+    return user; // Returning the updated user
+}
+
+
 // Exporting the Mongoose model with the defined schema
 module.exports = mongoose.model('User', userSchema);
