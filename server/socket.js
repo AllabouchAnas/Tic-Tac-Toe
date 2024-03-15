@@ -7,20 +7,27 @@ function socket(io) {
 
         socket.on("joinQueue", () => {
             queue.set(socket.id, socket);
-
+        
             if (queue.size >= MAX_USERS_PER_ROOM) {
                 const roomName = 'room_' + Math.random().toString(36).substring(7);
                 const players = Array.from(queue.values()).splice(0, 2);
-
-                players.forEach(player => {
-                    player.join(roomName);
-                    queue.delete(player.id);
-                    console.log(`User: ${socket.id} connected to room: ${roomName}`)
-                });
-
+        
+                // Assign 'x' tag to the first player
+                io.to(players[0].id).emit('tag', 'x');
+                players[0].join(roomName);
+                queue.delete(players[0].id);
+                console.log(`User: ${players[0].id} connected to room: ${roomName}`);
+        
+                // Assign 'o' tag to the second player
+                io.to(players[1].id).emit('tag', 'o');
+                players[1].join(roomName);
+                queue.delete(players[1].id);
+                console.log(`User: ${players[1].id} connected to room: ${roomName}`);
+        
                 io.to(roomName).emit('startGame', roomName);
             }
         });
+        
 
         socket.on("handShake", (arg)=> {
             console.log("HandShake", arg)

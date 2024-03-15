@@ -1,6 +1,6 @@
 .boardContainer {
     text-align: center;
-    margin-top: 50px;
+    margin-top: 0px;
     margin-left: -200px;
 }
 
@@ -8,6 +8,15 @@
     margin-top: 20px;
     color: white;
     font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title2 {
+    margin-top: 0px;
+    color: white;
+    font-size: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -72,4 +81,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.opponent img {
+    width: 30px;
 }

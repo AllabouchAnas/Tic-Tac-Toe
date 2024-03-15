@@ -4,23 +4,31 @@ import circle_icon from '../../../img/circle.png';
 import cross_icon from '../../../img/cross.png';
 import io from 'socket.io-client';
 import GameChat from '../chat/GameChat';
-import playSound from '../../../sounds/play.mp3'
+import PlaySound from '../../../sounds/play.mp3'
+import LoseSound from '../../../sounds/lose.mp3'
+import WinSound from '../../../sounds/won.mp3'
+import { useNavigate } from 'react-router-dom';
 
-const GameOnline = ({ room, user }) => {
-  const [turn, setTurn] = useState(true);
-  const [tag, setTag] = useState('x');
+const GameOnline = ({ room, user, tag }) => {
+  const [turn, setTurn] = useState(tag === 'x');
   const [lock, setLock] = useState(false);
+  const [win, setWin] = useState(false);
   const titleRef = useRef(null);
+  const titleRef2 = useRef(null);
   const [data, setData] = useState(["", "", "", "", "", "", "", "", ""]);
   const socket = useRef(null);
   const [player, setPlayer] = useState(JSON.parse(localStorage.getItem('user')).username);
   const [opponent, setOpponent] = useState('');
+  const playSound = new Audio(PlaySound)
+  const winSound = new Audio(WinSound)
+  const loseSound = new Audio(LoseSound)
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Connect to Socket.IO server
     if (!socket.current) {
       socket.current = user;
-  }
+    }
 
   socket.current.on('handShake', (arg) => {
     setOpponent(arg)
@@ -30,31 +38,30 @@ const GameOnline = ({ room, user }) => {
     console.log(room, opponent)
 
     socket.current.on("userLeft", (arg) => {
-      titleRef.current.innerHTML = "You win, Opponent left the game";
+      titleRef.current.innerHTML = "Opponent left the game ✈️";
+      titleRef2.current.innerHTML = "Wanna play again?";
       setLock(true);
+      setWin(true)
     });
 
     socket.current.on("num", (arg) => {
       if(arg.tag === 'o') {
         document.querySelector('.x' + arg.index).innerHTML = `<img src='${circle_icon}'>`;
         data[arg.index] = "o";
-        setTag('x');
-        setTurn(true);
       } else {
         document.querySelector('.x' + arg.index).innerHTML = `<img src='${cross_icon}'>`;
         data[arg.index] = "x";
-        setTag('o');
-        setTurn(true);
       }
+      setTurn(tag !== arg.tag);
       console.log(arg)
       checkWin()
-
+      checkDraw()
       // Cleanup function for disconnecting socket
       return () => {
         socket.current.disconnect();
       };
     });
-  }, [room]);
+  }, []);
 
   const toggle = (num) => {
     if (lock || data[num] !== '' || !turn) {
@@ -69,9 +76,12 @@ const GameOnline = ({ room, user }) => {
       data[num] = "o";
       setTurn(false);
     }
-    new Audio(playSound).play();
-    socket.current.emit('num', { index: num, tag: data[num], room: room });
+    
+    playSound.play();
+    socket.current.emit('num', {player: player, index: num, tag: tag, room: room });
     checkWin();
+    console.log("win:", win)
+    checkDraw()
   };
 
   const checkWin = () => {
@@ -96,10 +106,36 @@ const GameOnline = ({ room, user }) => {
 
   const won = (winner) => {
     setLock(true);
-    if (winner === "x") {
-      titleRef.current.innerHTML = `Congratulations: <img src='${cross_icon}'> Wins`;
+    // if (winner === "x") {
+    //   titleRef.current.innerHTML = `Congratulations: <img src='${cross_icon}'> Wins`;
+    // } else {
+    //   titleRef.current.innerHTML = `Congratulations: <img src='${circle_icon}'> Wins`;
+    // }
+    setWin(true)
+    if (winner === tag) {
+      titleRef.current.innerHTML = `Victory is yours! 🏆`;
+      titleRef2.current.innerHTML = `Good Job`;
+      winSound.play()
     } else {
-      titleRef.current.innerHTML = `Congratulations: <img src='${circle_icon}'> Wins`;
+      titleRef.current.innerHTML = `Oops, you lost! 😞`;
+      titleRef2.current.innerHTML = `Keep trying`;
+      loseSound.play()
+    }
+  };
+
+  const checkDraw = () => {
+    let draw = true;
+    for (let i = 0; i < 9; i++) {
+      if (data[i] === '') {
+        draw = false;
+        break;
+      }
+    }
+    if (draw && !win) {
+      titleRef.current.innerHTML = `It's a Draw! 😕`;
+      titleRef2.current.innerHTML = `No winners`;
+      setLock(true);
+      setWin(true);
     }
   };
 
@@ -115,6 +151,15 @@ const GameOnline = ({ room, user }) => {
   return (
     <div className='boardContainer'>
       <h1 className='title' ref={titleRef}>Tic Tac Toe</h1>
+      <h1 className='title2' ref={titleRef2}>
+        {
+        (turn && !win)  ? `Your Turn` : `Opponent\'s Turn`
+      }
+      {
+        (win)  && ``
+      }
+      </h1>
+      
       <div className='board'>
         <div className='row1'>
           <div className='box x0' onClick={() => { toggle(0) }}></div>
@@ -132,8 +177,14 @@ const GameOnline = ({ room, user }) => {
           <div className='box x8' onClick={() => { toggle(8) }}></div>
         </div>
       </div>
-      <h2 className='opponent'>{player} vs {opponent}</h2>
-      {/* <button className='reset' onClick={() => { reset() }}>Reset</button> */}
+      <h2 className='opponent'>
+        {player.toUpperCase()}:{'  '}
+        {tag === 'x' ? <img src={cross_icon} alt="Cross Icon" /> : <img src={circle_icon} alt="Circle Icon" />}{'  '}
+        <strong>vs</strong>{' '}
+        {opponent.toUpperCase()}:{'  '}
+        {tag === 'x' ? <img src={circle_icon} alt="Circle Icon" /> : <img src={cross_icon} alt="Cross Icon" />}
+      </h2>
+      { win &&  <button className='reset' onClick={() => { navigate('/') }}>Exit Game</button>}
       <GameChat room={room} user={user} />
     </div>
   );

@@ -5,6 +5,7 @@ import io from 'socket.io-client';
 function GameQueue() {
     const [playersJoined, setPlayersJoined] = useState(0);
     const [roomName, setRoomName] = useState('');
+    const [tag, setTag] = useState('');
     const socket = useRef(null);
 
     useEffect(() => {
@@ -20,6 +21,10 @@ function GameQueue() {
             setPlayersJoined(2); // Set playersJoined to 2 to trigger the redirection
         });
 
+        socket.current.on('tag', (tag) => {
+            setTag(tag)
+        });
+
         return () => {
             // Disconnect from Socket.IO server when component unmounts
             socket.current.disconnect();
@@ -28,7 +33,7 @@ function GameQueue() {
 
     // Render the GameOnline component if enough players have joined and a room name is available
     if (playersJoined >= 2 && roomName) {
-        return <GameOnline room={roomName} user={socket.current} />;
+        return <GameOnline room={roomName} user={socket.current} tag={tag} />;
     } else {
         return (
             <div className='game-queue'>
