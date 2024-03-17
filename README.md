@@ -17,6 +17,8 @@ This project consists of a Tic-Tac-Toe game implemented using MERN stack.
 - WebSocket: Real-time communication protocol
 - Flask: Python web framework
 - NumPy: Scientific computing library for Python
+- Monte Carlo Tree Search (MCTS): Search algorithm for decision processes
+- Upper Confidence Bound (UCB): Algorithm for decision making in uncertainty
 
 ## Screenshots
 ![Screenshot GIF](https://github.com/AllabouchAnas/Tic-Tac-Toe/blob/main/Screenshots.gif)
