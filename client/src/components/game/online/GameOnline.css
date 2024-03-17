@@ -1,4 +1,4 @@
-.boardContainer {
+.boardContainerOnline {
     text-align: center;
     margin-top: 0px;
     margin-left: -200px;
@@ -62,12 +62,15 @@
     margin: auto;
 }
 
-.game-queue{
+.game-queue {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center;
+    /* Center horizontally */
+    align-items: center;
+    /* Center vertically */
     height: 100vh;
 }
+
 .game-queue p {
     color: aliceblue;
     font-size: 40px;

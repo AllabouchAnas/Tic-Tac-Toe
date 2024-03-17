@@ -85,6 +85,18 @@ userSchema.statics.edit = async function(oldUsername, newUsername, newPassword) 
     return user; // Returning the updated user
 }
 
+userSchema.statics.update = async function(username, score) {
+
+    const user = await this.findOne({ username: username }, {username: 1, score: 1});
+    if (!user) throw new Error('User not found!');
+
+    user.score += score;
+
+    await user.save();
+
+    return user; 
+}
+
 
 // Exporting the Mongoose model with the defined schema
 module.exports = mongoose.model('User', userSchema);

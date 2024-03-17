@@ -104,11 +104,31 @@ const leaderBoard = async (req, res) => {
     }
 }
 
+const updateScore = async (req, res) => {
+        const { username, score } = req.body;
+
+    try {
+        // Attempting to find the user by userId
+        const user = await User.update(username, score);
+
+        if (!user) {
+            throw new Error('User not found');
+        }
+
+        // Sending the updated user data in the response
+        res.status(200).json(user);
+    } catch (error) {
+        // Handling errors if user editing fails
+        res.status(400).json({ error: error.message });
+    }
+}
+
 // Exporting the login and register controller functions
 module.exports = {
     loginUser,
     registerUser,
     getUser,
     editUser,
-    leaderBoard
+    leaderBoard,
+    updateScore
 }
