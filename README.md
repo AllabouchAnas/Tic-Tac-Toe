@@ -27,7 +27,7 @@ This project consists of a Tic-Tac-Toe game implemented using MERN stack.
 
 ### Prerequisites
 
-- Node.js and npm installed on your machine.
+- Node.js, npm and Python installed on your machine.
 
 ### Client Installation
 
@@ -79,8 +79,9 @@ This project consists of a Tic-Tac-Toe game implemented using MERN stack.
     npm run dev
     ```
 
-The node server will run on `http://localhost:4000` by default.
-The flask server will run on `http://localhost:5000` by default.
+- The node server will run on `http://localhost:4000` by default.
+- The flask server will run on `http://localhost:5000` by default.
+
 
 ### Starting the Client
 
