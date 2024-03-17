@@ -5,8 +5,12 @@ This project consists of a Tic-Tac-Toe game implemented using MERN stack.
 ## Features
 
 - Play Tic-Tac-Toe against another player locally or online.
-- Real-time gameplay with WebSocket communication.
-- Responsive design for various screen sizes.
+- Play Tic-Tac-Toe against an AI opponent.
+- Real-time gameplay with WebSocket communication for online matches.
+- Login/Register system for user authentication.
+- User profiles to track game statistics and preferences.
+- Leaderboard to display top players and their rankings.
+- Responsive design for seamless gameplay experience across various screen sizes.
 
 ## Technologies Used
 
