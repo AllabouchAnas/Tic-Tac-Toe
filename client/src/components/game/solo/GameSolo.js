@@ -43,7 +43,7 @@ const GameSolo = ({ difficulty }) => {
 
     const toggle = async (e, num) => {
         if (end || !turn || !gameStarted || data[num]!=='') {
-            return;
+            return 0;
         }
         e.target.innerHTML = `<img src='${cross_icon}'>`;
         data[num] = "x";

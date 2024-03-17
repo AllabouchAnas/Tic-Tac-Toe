@@ -10,11 +10,16 @@ This project consists of a Tic-Tac-Toe game implemented using MERN stack.
 
 ## Technologies Used
 
-- MongoDB
-- Express.js
-- React
-- Node.js
-- WebSocket
+- MongoDB: NoSQL database
+- Express.js: Web application framework
+- React: JavaScript library for UI
+- Node.js: JavaScript runtime environment
+- WebSocket: Real-time communication protocol
+- Flask: Python web framework
+- NumPy: Scientific computing library for Python
+
+## Screenshots
+![Screenshot GIF](https://github.com/AllabouchAnas/Tic-Tac-Toe/blob/main/Screenshots.gif)
 
 ## Installation
 
@@ -69,10 +74,11 @@ This project consists of a Tic-Tac-Toe game implemented using MERN stack.
 2. Start the server:
 
     ```
-    npm start
+    npm run dev
     ```
 
-The server will run on `http://localhost:4000` by default.
+The node server will run on `http://localhost:4000` by default.
+The flask server will run on `http://localhost:5000` by default.
 
 ### Starting the Client
 
@@ -92,8 +98,16 @@ The client application will open in your default web browser at `http://localhos
 
 ## Contributing
 
-Contributions are welcome! If you'd like to contribute to this project, please fork the repository and submit a pull request with your changes.
+We welcome contributions from the community. Feel free to fork the repository, make improvements, and submit pull requests.
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/awesome-feature`
+3. Make changes and commit: `git commit -m 'Add awesome feature'`
+4. Push to the branch: `git push origin feature/awesome-feature`
+5. Open a pull request.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This App is licensed under the [MIT License](https://choosealicense.com/licenses/mit/), allowing for open collaboration and innovation in the spirit of shared knowledge.
+
+Thank you for being part of our community! If you have any questions or suggestions, feel free to open an issue or reach out to us. Happy coding! 🚀📞
