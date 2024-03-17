@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaGamepad, FaUserFriends, FaTrophy } from 'react-icons/fa';
+import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaGamepad, FaUserFriends, FaTrophy, FaRobot } from 'react-icons/fa';
 import { useLogout } from '../authentication/hooks/useLogout';
 import { useAuthContext } from '../authentication/hooks/useAuthContext';
 import './SideBar.css';
@@ -8,10 +8,11 @@ import Logo from '../../img/logo.png'
 
 const SideBar = () => {
   const { logout } = useLogout();
-  const { user } = useAuthContext();
+  const { user, setUser } = useAuthContext();
 
   const handleLogout = () => {
     logout();
+    setUser(null);
   };
 
   return (
@@ -34,17 +35,21 @@ const SideBar = () => {
           <Link to="/gameonline">
             <FaUserFriends /> Game Online
           </Link>
+          <Link to="/gamesolo">
+            <FaRobot /> Game Solo
+          </Link>
         </div>
-        {user ? (
+        {user &&
           <div className="user-info">
             <Link to="/profile">
             <FaUser /> {user.username.toUpperCase()}
             </Link>
-            <Link to="#" onClick={handleLogout}>
+            <Link to="/" onClick={handleLogout}>
               <FaSignOutAlt /> Logout
             </Link>
           </div>
-        ) : (
+        }
+        {!user && 
           <div className="auth-links">
             <Link to="/login">
               <FaSignInAlt /> Login
@@ -53,7 +58,7 @@ const SideBar = () => {
               <FaUser /> Register
             </Link>
           </div>
-        )}
+        }
       </nav>
     </header>
   );

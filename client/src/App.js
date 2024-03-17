@@ -7,6 +7,7 @@
   import SideBar from './components/menu/SideBar';
   import GameBoard from './components/game/board/GameBoard'
   import GameOnline from './components/game/online/GameOnline'
+  import GameSolo from  './components/game/solo/BotLevel';
   import GameQueue from './components/game/online/GameQueue'
   import LeaderBoard from './components/leaderBoard/LeaderBord';
   import Profile from './components/profile/Profile';
@@ -60,6 +61,10 @@
               <Route 
                 path="/editprofile" 
                 element={!isAuth ? <Navigate to="/login" /> : <EditProfile />} 
+              />
+              <Route 
+                path="/gamesolo" 
+                element={!isAuth ? <Navigate to="/login" /> : <GameSolo />} 
               />
             </Routes>
           </div>

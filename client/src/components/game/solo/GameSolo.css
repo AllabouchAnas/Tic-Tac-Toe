@@ -1,0 +1,113 @@
+.bot-level {
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 100px;
+    margin-left: 105px;
+}
+
+.top-cards,
+.bottom-cards {
+    display: flex;
+    gap: 100px;
+}
+
+.card {
+    background-color: #0f1B21;
+    /* Adjusted card background color */
+    color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    cursor: pointer;
+    /* Add cursor pointer to indicate clickable */
+    transition: background-color 0.3s ease;
+    /* Add transition for hover effect */
+}
+
+.card:hover {
+    background-color: #1f2c32;
+    /* Slightly lighter shade for hover effect */
+}
+
+.easy {
+    border: 2px solid #6e6;
+}
+
+.medium {
+    border: 2px solid #fc6;
+}
+
+.hard {
+    border: 2px solid #f66;
+}
+
+.extreme {
+    border: 2px solid #999;
+}
+
+.boardContainer {
+    text-align: center;
+    /* margin-top: 0px; */
+    margin-left: 150px;
+}
+
+.title {
+    margin-top: 20px;
+    color: white;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title img {
+    padding: 10px;
+    height: 30px;
+}
+
+.reset {
+    width: 180px;
+    height: 70px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 35px;
+    background: #1f3540;
+    font-size: 20px;
+    color: #26ffcb;
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.box {
+    display: flex;
+    height: 140px;
+    width: 140px;
+    background: #1f3540;
+    border: 3px solid #0f1b21;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.box img {
+    margin: 30px;
+}
+
+.board {
+    height: 450px;
+    width: 424px;
+    display: flex;
+    margin: auto;
+}
