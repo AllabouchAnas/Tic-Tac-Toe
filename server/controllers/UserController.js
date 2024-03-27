@@ -1,5 +1,5 @@
 // Importing the User model
-const User = require('../models/UserModel');
+const { User, Game } = require('../models/UserModel');
 
 // Importing the jsonwebtoken package
 const jwt = require("jsonwebtoken");
@@ -105,11 +105,11 @@ const leaderBoard = async (req, res) => {
 }
 
 const updateScore = async (req, res) => {
-        const { username, score } = req.body;
+        const { username, score, won } = req.body;
 
     try {
         // Attempting to find the user by userId
-        const user = await User.update(username, score);
+        const user = await User.update(username, score, won);
 
         if (!user) {
             throw new Error('User not found');
@@ -123,6 +123,28 @@ const updateScore = async (req, res) => {
     }
 }
 
+const gameLog = async (req, res) => {
+    const { username, won, opponent } = req.body;
+
+    try {
+        // Attempting to log the first game
+        const user1 = await User.findOne({ username: username });
+        const game1 = await Game.log(username, user1.score, won, opponent);
+
+        // Attempting to log the second game
+        const user2 = await User.findOne({ username: opponent });
+        const game2 = await Game.log(opponent, user2.score, !won, username);
+
+        // Sending both game data in the response
+        res.status(200).json({ game1, game2 });
+    } catch (error) {
+        // Handling errors if logging the game fails
+        res.status(400).json({ error: error.message });
+    }
+}
+
+
+
 // Exporting the login and register controller functions
 module.exports = {
     loginUser,
@@ -130,5 +152,6 @@ module.exports = {
     getUser,
     editUser,
     leaderBoard,
-    updateScore
+    updateScore,
+    gameLog
 }

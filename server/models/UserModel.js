@@ -10,7 +10,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: { type: String, required: true, unique: true }, // username field with required and unique constraints
     password: { type: String, required: true }, // Password field with required constraint
-    score: { type: Number, default: 400 } // Score field with a default value of 400
+    score: { type: Number, default: 400 }, // Score field with a default value of 400
+    won: { type: Number, default: 0 },
+    lost: { type: Number, default: 0 },
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+});
+
+const gameSchema = new Schema({
+    username: { type: String, required: true }, // username field with required and unique constraints
+    score: { type: Number, required: true}, // Score field with a default value of 400
+    won: { type: Boolean, required: true },
+    opponent: { type: String, required: true },
+    createdAt: { type: Date, default: Date.now }
 });
 
 // Static login method for the user schema
@@ -79,24 +91,36 @@ userSchema.statics.edit = async function(oldUsername, newUsername, newPassword) 
 
     user.username = newUsername;
     user.password = hash;
+    user.updatedAt = Date.now();
 
     await user.save(); // Save the changes to the user
 
     return user; // Returning the updated user
 }
 
-userSchema.statics.update = async function(username, score) {
+userSchema.statics.update = async function(username, score, won) {
 
-    const user = await this.findOne({ username: username }, {username: 1, score: 1});
+    const user = await this.findOne({ username: username }, {username: 1, score: 1, won: 1, lost:1});
     if (!user) throw new Error('User not found!');
 
     user.score += score;
-
+    if (won === true) user.won++; else user.lost++ ;
     await user.save();
 
     return user; 
 }
 
+gameSchema.statics.log = async function(username, score, won, opponent) {
+    const game = await this.create({ username: username, score: score, won: won, opponent: opponent });
+    if (!game) throw new Error('Error!');
+    return game;
+}
 
-// Exporting the Mongoose model with the defined schema
-module.exports = mongoose.model('User', userSchema);
+
+
+// Exporting the Mongoose models with the defined schemas
+module.exports = {
+    User: mongoose.model('User', userSchema),
+    Game: mongoose.model('Game', gameSchema)
+};
+

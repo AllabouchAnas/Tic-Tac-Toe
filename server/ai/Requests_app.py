@@ -4,7 +4,7 @@ import json
 # level: 1 easy
 # level: 3 medium
 # level: 4> hard
-# level: 100> hard
+# level: 10> hard
 
 BASE = "http://127.0.0.1:5000/"
 

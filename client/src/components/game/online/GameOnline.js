@@ -104,13 +104,12 @@ const GameOnline = ({ room, user, tag }) => {
     }
   };
 
-  const updateScore = async (score) => {
-      console.log('score', user)
+  const gameLog = async(won) => {
         try {
-            const response = await fetch('/api/user/updateScore', {
+            const response = await fetch('/api/user/gameLog', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ username: player, score: score })
+                body: JSON.stringify({ username: player, won: won, opponent: opponent})
             });
             if (response.ok) {
               const data = await response.json();
@@ -122,7 +121,27 @@ const GameOnline = ({ room, user, tag }) => {
             console.error('Error:', error);
             return null;
         }
-    };
+  }
+
+    const updateScore = async (score, won) => {
+      console.log('score', user)
+        try {
+            const response = await fetch('/api/user/updateScore', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ username: player, score: score, won: won})
+            });
+            if (response.ok) {
+              const data = await response.json();
+              return data
+            } else {
+                throw new Error('Failed to fetch update score');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+  };
 
   const won = (winner) => {
     setLock(true);
@@ -133,18 +152,20 @@ const GameOnline = ({ room, user, tag }) => {
     // }
     setWin(true)
     const score = Math.floor(Math.random() * 6) + 25;
-    updateScore(score)
     if (winner === tag) {
-      updateScore(score)
+      updateScore(score, true);
+      gameLog(true)
       titleRef.current.innerHTML = `Victory is yours! 🏆`;
       titleRef2.current.innerHTML = `Good Job! You got ${score} points.`;
       winSound.play()
     } else {
-      updateScore(-score)
+      updateScore(-score, false);
+      // gameLog(false)
       titleRef.current.innerHTML = `Oops, you lost! 😞`;
       titleRef2.current.innerHTML = `You lost -${score} points. Keep trying!`;
       loseSound.play()
     }
+    
   };
 
   const checkDraw = () => {
