@@ -13,6 +13,7 @@ const userSchema = new Schema({
     score: { type: Number, default: 400 }, // Score field with a default value of 400
     won: { type: Number, default: 0 },
     lost: { type: Number, default: 0 },
+    draw: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
 import './Profile.css'; // Import the CSS file containing styles
+import Chart from './ChartProfile';
 
 function Profile() {
   const [userData, setUserData] = useState(null);
@@ -46,23 +47,26 @@ function Profile() {
   };
 
   return (
-    <div className="profile-card">
-      <div className="tic-tac-toe-icons">
-        <i className="fas fa-times"></i>
-      </div>
-      <div className="profile-picture">
-        <img src="https://randomuser.me/api/portraits/lego/6.jpg" alt="Profile Picture" />
-      </div>
-      <div className="profile-details">
-        <div className="profile-info">
-          <h1>Name: {userData?.username.toUpperCase() || "Loading..."}</h1>
-          <p>Role: {getRoleFromScore(userData?.score) || "Loading..."}</p>
+    <div className='profile'>
+      <div className="profile-card">
+        <div className="tic-tac-toe-icons">
+          <i className="fas fa-times"></i>
         </div>
-        <div className="score">Player Score: {userData?.score || "Loading..."}</div>
+        <div className="profile-picture">
+          <img src="https://randomuser.me/api/portraits/lego/6.jpg" alt="Profile Picture" />
+        </div>
+        <div className="profile-details">
+          <div className="profile-info">
+            <h1>{userData?.username.toUpperCase() || "Loading..."}</h1>
+            <p>Role: {getRoleFromScore(userData?.score) || "Loading..."}</p>
+          </div>
+          <div className="score">Player Score: {userData?.score || "Loading..."}</div>
+        </div>
+        <button className="edit-button" onClick={handleEditProfile}>
+          <i className="fas fa-edit"></i> Edit Profile
+        </button>
       </div>
-      <button className="edit-button" onClick={handleEditProfile}>
-        <i className="fas fa-edit"></i> Edit Profile
-      </button>
+      {userData && <Chart won={userData.won} lost={userData.lost} draw={2} />}
     </div>
   );
 }
