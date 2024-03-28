@@ -7,7 +7,8 @@ const ChartProfile = ({won, lost, draw}) => {
     const chartInstance = useRef(null)
 
     const winPercentage = () => {
-        return ((won * 100) / (won + draw + lost))
+        const percentage = (won * 100) / (won + draw + lost);
+        return percentage.toFixed(2);
     }
 
     useEffect(() => {

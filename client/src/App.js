@@ -12,6 +12,7 @@
   import LeaderBoard from './components/leaderBoard/LeaderBord';
   import Profile from './components/profile/Profile';
   import EditProfile from './components/profile/EditProfile';
+  import GameLog from './components/game/log/GameLog';
 
   function App() {
     const isAuth = localStorage.getItem('user')
@@ -65,6 +66,10 @@
               <Route 
                 path="/gamesolo" 
                 element={!isAuth ? <Navigate to="/login" /> : <GameSolo />} 
+              />
+              <Route 
+                path="/gamelog" 
+                element={!isAuth ? <Navigate to="/login" /> : <GameLog />} 
               />
             </Routes>
           </div>

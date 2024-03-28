@@ -5,7 +5,7 @@ const express = require('express');
 const router = express.Router();
 
 // Importing controller functions for user authentication
-const { loginUser, registerUser, leaderBoard, getUser, editUser, updateScore, gameLog } = require('../controllers/UserController');
+const { loginUser, registerUser, leaderBoard, getUser, editUser, updateScore, gameLog, getGameLog } = require('../controllers/UserController');
 
 // Defining routes
 
@@ -24,6 +24,8 @@ router.post('/editUser', editUser);
 router.post('/updateScore', updateScore);
 
 router.post('/gameLog', gameLog);
+
+router.post('/getGameLog', getGameLog);
 
 // Exporting the router module
 module.exports = router;

@@ -143,6 +143,19 @@ const gameLog = async (req, res) => {
     }
 }
 
+const getGameLog = async (req, res) => {
+    const { username } = req.body;
+
+    try {
+        const gameLog = await Game.find({ username: username }).sort({createdAt: -1});
+
+        res.status(200).json({ gameLog });
+    } catch (error) {
+        // Handling errors if logging the game fails
+        res.status(400).json({ error: error.message });
+    }
+}
+
 
 
 // Exporting the login and register controller functions
@@ -153,5 +166,6 @@ module.exports = {
     editUser,
     leaderBoard,
     updateScore,
-    gameLog
+    gameLog,
+    getGameLog
 }
