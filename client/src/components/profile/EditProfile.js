@@ -2,20 +2,16 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import '../authentication/pages/Auth.css';
 
-// Component for editing user profile
 const EditProfile = () => {
-    // State variables for new username, new password, and old username
     const [newUsername, setNewUsername] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [error, setError] = useState('');
-    const navigate = useNavigate(); // Use navigate to redirect upon successful update.
+    const navigate = useNavigate(); 
     const user = JSON.parse(localStorage.getItem('user'));
 
-    // Handle form submission for editing profile
     const handleSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
 
-        // Prepare the body for API call
         const requestBody = {oldUsername: JSON.parse(localStorage.getItem('user')).username};
         if (newUsername) requestBody.newUsername = newUsername;
         if (newPassword) requestBody.newPassword = newPassword;
@@ -34,42 +30,36 @@ const EditProfile = () => {
               localStorage.setItem("user", JSON.stringify(user)); 
             }
 
-            // Redirect to profile page upon successful update
             navigate('/profile');
         } catch (error) {
             setError(error.message);
         }
     }
 
-    // Render the edit profile form
     return (
         <form className="login" onSubmit={handleSubmit}>
             <h1>Edit Profile:</h1>
 
-            {/* Input field for new username */}
             <input 
                 type="text"  
-                onChange={(e) => setNewUsername(e.target.value)} // Update newUsername state on change
+                onChange={(e) => setNewUsername(e.target.value)}
                 placeholder="New Username"
-                value={newUsername} // Set newUsername value from state
+                value={newUsername} 
             />
 
             <br/>
 
-            {/* Input field for new password */}
             <input 
                 type="password"  
-                onChange={(e) => setNewPassword(e.target.value)} // Update newPassword state on change
+                onChange={(e) => setNewPassword(e.target.value)} 
                 placeholder="New Password"
-                value={newPassword} // Set newPassword value from state
+                value={newPassword} 
             />
 
             <br/>
 
-            {/* Button for form submission */}
             <button>Update Profile</button>
 
-            {/* Display error message if there is an error */}
             {error && <div className="error">{error}</div>}
         </form>
     )

@@ -19,7 +19,6 @@ const SideBar = () => {
     <header>
       <nav className="sidebar">
         <Link to="/" className="logo">
-          {/* <h1>Tic Tac Toe</h1> */}
           <img src={ Logo }></img>
         </Link>
         <div className="sidebar-links">

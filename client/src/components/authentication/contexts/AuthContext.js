@@ -13,7 +13,6 @@ export const authReducer = (state, action) => {
   }
 };
 
-// Provider component for AuthContext
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null
@@ -22,14 +21,12 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user) {
-      dispatch({ type: 'LOGIN', payload: user }); // Dispatch login action if user data found
+      dispatch({ type: 'LOGIN', payload: user }); 
     }
   }, []);
 
-  // Log authentication state for debugging purposes
   console.log('AuthContext state:', state);
 
-  // Provide authentication state and dispatch function to children components
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}

@@ -9,7 +9,6 @@ const GameChat = ({ room, user }) => {
     const [input, setInput] = useState('');
 
     useEffect(() => {
-        // Connect to Socket.IO server
         const socket = io();
         setSocket(socket);
 
@@ -18,7 +17,6 @@ const GameChat = ({ room, user }) => {
         socket.emit('joinRoom', room);
 
         socket.on('message', (message) => {
-            // When a new message arrives, play the message sound
             audio.play();
             setMessages(prevMessages => [...prevMessages, message.message]);
         });
@@ -30,7 +28,6 @@ const GameChat = ({ room, user }) => {
 
     const sendMessage = () => {
         if (input.trim() !== '' && socket) {
-            // Emit a socket event to send the message to the server
             socket.emit('message', { message: input, room: room });
             setMessages(prevMessages => [...prevMessages, input]);
             setInput('');

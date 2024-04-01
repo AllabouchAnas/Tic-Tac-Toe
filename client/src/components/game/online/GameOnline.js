@@ -25,7 +25,6 @@ const GameOnline = ({ room, user, tag }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Connect to Socket.IO server
     if (!socket.current) {
       socket.current = user;
     }
@@ -56,7 +55,6 @@ const GameOnline = ({ room, user, tag }) => {
       console.log(arg)
       checkWin()
       checkDraw()
-      // Cleanup function for disconnecting socket
       return () => {
         socket.current.disconnect();
       };

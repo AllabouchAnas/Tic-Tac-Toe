@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
-import './Profile.css'; // Import the CSS file containing styles
+import { useNavigate } from 'react-router-dom'; 
+import './Profile.css'; 
 import Chart from './ChartProfile';
 
 function Profile() {
   const [userData, setUserData] = useState(null);
-  const navigate = useNavigate(); // Use useNavigate hook
+  const navigate = useNavigate(); 
 
   const handleEditProfile = () => {
-    navigate('/editprofile'); // Use navigate instead of history.push
+    navigate('/editprofile'); 
   };
 
   useEffect(() => {
@@ -31,7 +31,6 @@ function Profile() {
     fetchData();
   }, []);
 
-  // Function to determine the role based on the score
   const getRoleFromScore = (score) => {
     if (score < 500) {
       return 'Noob';
