@@ -67,6 +67,20 @@ This project consists of a Tic-Tac-Toe game implemented using MERN stack.
     npm i
     ```
 
+3. Copy the .env.example file to create a new .env file:
+
+    ```
+    cp .env.example .env
+    ```
+
+4. Open and update the newly created `.env` file in a text editor with the necessary environment variables, such as the database connection URI and secret keys. For example:
+
+    ```
+    PORT=4000
+    MONGODB_URI=mongodb://localhost:27017/tic-tac-toe
+    SECRET_KEY=tictactoe
+    ```
+
 ## Usage
 
 ### Starting the Server
