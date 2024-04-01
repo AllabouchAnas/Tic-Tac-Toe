@@ -65,7 +65,7 @@
               />
               <Route 
                 path="/gamesolo" 
-                element={!isAuth ? <Navigate to="/login" /> : <GameSolo />} 
+                element={<GameSolo />} 
               />
               <Route 
                 path="/gamelog" 

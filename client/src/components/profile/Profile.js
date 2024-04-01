@@ -66,7 +66,7 @@ function Profile() {
           <i className="fas fa-edit"></i> Edit Profile
         </button>
       </div>
-      {userData && <Chart won={userData.won} lost={userData.lost} draw={2} />}
+      {userData && <Chart won={userData.won} lost={userData.lost} draw={userData.draw} />}
     </div>
   );
 }

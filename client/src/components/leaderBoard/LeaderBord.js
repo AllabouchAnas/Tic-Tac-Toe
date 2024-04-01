@@ -32,7 +32,7 @@ const LeaderBoard = () => {
                             {leaderboardData.map((entry, index) => (
                                 <tr key={index} className="row">
                                     <td className="cell number">{index + 1}</td>
-                                    <td className="cell name">{entry.username}</td>
+                                    <td className="cell name">{entry.username.toUpperCase()}</td>
                                     <td className="cell points">{entry.score}{index === 0 && <img className="gold-medal" src="https://github.com/malunaridev/Challenges-iCodeThis/blob/master/4-leaderboard/assets/gold-medal.png?raw=true" alt="Gold Medal"/>}</td>
                                 </tr>
                             ))}

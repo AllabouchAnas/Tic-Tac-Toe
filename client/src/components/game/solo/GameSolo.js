@@ -3,6 +3,9 @@ import './GameSolo.css';
 import circle_icon from '../../../img/circle.png';
 import cross_icon from '../../../img/cross.png';
 import { useNavigate } from 'react-router-dom';
+import PlaySound from '../../../sounds/play.mp3'
+import LoseSound from '../../../sounds/lose.mp3'
+import WinSound from '../../../sounds/won.mp3'
 
 const apiUrl = 'http://127.0.0.1:5000';
 
@@ -15,6 +18,9 @@ const GameSolo = ({ difficulty }) => {
     const [gameStarted, setGameStarted] = useState(false); // State to track if the game has started
     const titleRef = useRef(null);
     const navigate = useNavigate();
+    const playSound = new Audio(PlaySound)
+    const winSound = new Audio(WinSound)
+    const loseSound = new Audio(LoseSound)
 
     useEffect(() => {
         startGame();
@@ -47,6 +53,7 @@ const GameSolo = ({ difficulty }) => {
         }
         e.target.innerHTML = `<img src='${cross_icon}'>`;
         data[num] = "x";
+        playSound.play()
         setTurn(false);
         
         const botMove = await getBotMove(num, difficulty);
@@ -87,12 +94,15 @@ const won = () => {
     console.log("Game won status:", win, end);
     if (win && end) {
         titleRef.current.innerHTML = `🎉 Congratulations! You won!`;
+        winSound.play()
     }
     if (!win && end) {
         titleRef.current.innerHTML = `😔 Sorry, the AI won.`;
+        loseSound.play()
     }
     if (draw && end) {
         titleRef.current.innerHTML = `😐 It's a draw. Good game!`;
+        loseSound.play()
     }
 };
 

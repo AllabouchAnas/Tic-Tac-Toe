@@ -47,6 +47,14 @@ const Register = () => {
             />
 
             <br/>
+            <label>Upload your profile photo:</label>
+            <input
+                type="file"
+                name="fileUpload"
+                id="fileUpload"
+            />
+
+            <br/>
 
             {/* Button for form submission */}
             <button disabled={ isLoading }>Register</button>

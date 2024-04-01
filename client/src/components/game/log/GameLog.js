@@ -47,9 +47,9 @@ const GameLog = () => {
                         <div className="opponent-info-log">
                             <div>
                                 <p><strong>{game.opponent.toUpperCase()}</strong></p>
-                                <p><strong></strong>Score: 400{game.opponentScore}</p>
+                                <p><strong></strong>Score: {game.opponentScore}</p>
                             </div>
-                            <img src="https://randomuser.me/api/portraits/lego/6.jpg" alt="Opponent Profile Picture" />
+                            <img src="https://randomuser.me/api/portraits/lego/5.jpg" alt="Opponent Profile Picture" />
                         </div>
                     </div>
                 </div>

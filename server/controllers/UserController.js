@@ -147,7 +147,43 @@ const getGameLog = async (req, res) => {
     const { username } = req.body;
 
     try {
-        const gameLog = await Game.find({ username: username }).sort({createdAt: -1});
+        const gameLog = await Game.aggregate([
+            // Match games where the provided username is either the player or the opponent
+            {
+                $match: {
+                    $or: [
+                        { username: username },
+                        { opponent: username }
+                    ]
+                }
+            },
+            // Match games where the provided username is the player
+            {
+                $match: { username: username }
+            },
+            // Sort by createdAt in descending order
+            {
+                $sort: { createdAt: -1 }
+            },
+            // Project the necessary fields
+            {
+                $project: {
+                    _id: 1,
+                    username: 1,
+                    score: 1,
+                    won: 1,
+                    opponent: 1,
+                    opponentScore: {
+                        $cond: {
+                            if: { $eq: ["$username", username] },
+                            then: "$score",
+                            else: { $ifNull: ["$opponentScore", null] } // Assume opponentScore field exists
+                        }
+                    },
+                    createdAt: 1
+                }
+            }
+        ]);
 
         res.status(200).json({ gameLog });
     } catch (error) {
