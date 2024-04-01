@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import './GameSolo.css'; 
 import { FaRobot } from 'react-icons/fa';
-import GameSolo from './GameSolo'; // Import the GameSolo component
+import GameSolo from './GameSolo'; 
 
 const BotLevel = () => {
-  const [selectedDifficulty, setSelectedDifficulty] = useState(null); // State to track selected difficulty
+  const [selectedDifficulty, setSelectedDifficulty] = useState(null); 
 
-  // Function to handle card click
   const handleCardClick = (difficulty) => {
     console.log(`${difficulty.name} clicked`);
-    setSelectedDifficulty(difficulty); // Set selected difficulty in state
+    setSelectedDifficulty(difficulty); 
   };
 
-  // Render GameSolo if a difficulty is selected, otherwise render the card selection
   return (
     <div className="bot-level">
       {selectedDifficulty ? (

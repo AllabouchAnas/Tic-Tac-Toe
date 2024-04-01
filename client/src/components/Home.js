@@ -2,7 +2,6 @@ import React from "react";
 import xo from '../img/xo.png';
 import './Home.css';
 
-// Component for the home page
 const Home = () => {
     return (
         <div className="home-container">

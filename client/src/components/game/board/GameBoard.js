@@ -2,6 +2,9 @@ import React, { useRef, useState } from 'react'
 import './GameBoard.css'
 import circle_icon from '../../../img/circle.png'
 import cross_icon from '../../../img/cross.png'
+import PlaySound from '../../../sounds/play.mp3'
+import LoseSound from '../../../sounds/lose.mp3'
+import WinSound from '../../../sounds/won.mp3'
 
 let data = ["", "", "", "", "", "", "", "", ""]
 
@@ -9,6 +12,9 @@ const GameBord = () => {
   let [count, setCount] = useState(0);
   let [lock, setLock] = useState(false);
   let titleRef = useRef(null);
+  const playSound = new Audio(PlaySound)
+  const winSound = new Audio(WinSound)
+  const loseSound = new Audio(LoseSound)
 
   const toggle = (e,num) => {
     if (lock) {
@@ -23,6 +29,7 @@ const GameBord = () => {
       data[num] = "o";
       setCount(++count)
     }
+    playSound.play();
     checkWin()
   }
 
@@ -60,6 +67,7 @@ const GameBord = () => {
     } else {
       titleRef.current.innerHTML = `Congratulations: <img src='${circle_icon}'> Wins`
     }
+    winSound.play()
   }
 
   const reset = () => {

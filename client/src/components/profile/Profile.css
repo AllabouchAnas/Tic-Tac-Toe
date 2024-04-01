@@ -1,84 +1,128 @@
-  .profile-card {
-    background-color: #1f3540; /* Changed background color */
-    border-radius: 20px;
-    padding: 100px; /* Adjusted padding */
-    display: flex;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    position: relative;
-    width: 600px; /* Increased width */
-    position: absolute;
-    top: 25%;
-    left: 30%;
-    font-family: Arial, sans-serif;
-    color: #ffffff;
-  }
+.profile-card {
+  background-color: #1f3540;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 600px;
+  height: 500px;
+  position: absolute;
+  top: 100px;
+  left: 20%;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
 
-  .profile-info {
-    margin-left: 20px;
-  }
+.profile-info {
+  margin-left: 20px;
+}
 
-  .profile-info h1 {
-    font-size: 2.2em; /* Increased font size */
-    margin-bottom: 10px; /* Increased margin */
-  }
+.profile-info h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  position: absolute;
+  top: 250px;
+  right: 30%;
+}
 
-  .profile-info p {
-    font-size: 1.4em; /* Increased font size */
-    margin-bottom: 20px; /* Increased margin */
-  }
+.profile-info p {
+  font-size: 1.3em;
+  margin-bottom: 15px;
+  position: absolute;
+  top: 330px;
+  right: 42%;
+}
 
-  .edit-button {
-    position: absolute;
-    bottom: 20px; /* Increased bottom margin */
-    right: 20px; /* Increased right margin */
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px; /* Increased padding */
-    font-size: 1em; /* Increased font size */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
+.edit-button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  /* Adjust this value according to your preference */
+}
 
-  .edit-button:hover {
-    background-color: #0056b3;
-  }
+.edit-button:hover {
+  background-color: #0056b3;
+}
 
-  .score {
-    font-size: 1.4em; /* Increased font size */
-    background-color: #2980b9;
-    color: #ffffff;
-    padding: 5px 10px;
-    border-radius: 5px;
-    margin-left: auto; /* Adjusted margin */
-    margin-right: 20px; /* Adjusted margin */
-  }
+.score {
+  font-size: 1.3em;
+  background-color: #2980b9;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-left: auto;
+  margin-right: 20px;
+  position: absolute;
+  top: 400px;
+  right: 200px;
+}
 
-  .profile-picture {
-    width: 150px; /* Increased size */
-    height: 150px; /* Increased size */
-    border-radius: 50%;
-    overflow: hidden;
-  }
+.profile-picture {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}
 
-  .profile-picture img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%; /* Ensures image is displayed as a circle */
-  }
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
 
-  .profile-details {
-    display: flex;
-    flex-direction: column;
-  }
+.profile-details {
+  display: flex;
+  flex-direction: column;
+}
 
-  .tic-tac-toe-icons {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 3em;
-    color: #ffffff;
-  }
+.tic-tac-toe-icons {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 3em;
+  color: #ffffff;
+}
+
+.Chart {
+  height: 500px;
+  width: 500px;
+  position: absolute;
+  top: 100px;
+  right: 20px;
+  background-color: #1f3540;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
+
+.Chart canvas {
+  position: absolute;
+  top: 70px;
+  left: 15%;
+  height: 400px !important;
+  width: 400px !important;
+  display: block;
+}
+
+.Chart h2 {
+  position: absolute;
+  top: 250px;
+  left: 45%;
+  color: #ffffff;
+}

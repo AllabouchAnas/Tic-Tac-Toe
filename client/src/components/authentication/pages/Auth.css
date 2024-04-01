@@ -1,57 +1,78 @@
 .login {
-    width: 350px; /* Increased width */
-    padding: 60px; /* Increased padding */
+    width: 350px;
+    /* Increased width */
+    padding: 60px;
+    /* Increased padding */
     position: absolute;
     top: 50%;
     left: 55%;
     transform: translate(-50%, -50%);
     text-align: center;
-    border: 3px solid white; /* Increased border size */
-    border-radius: 30px; /* Increased border radius */
+    border: 3px solid white;
+    /* Increased border size */
+    border-radius: 30px;
+    /* Increased border radius */
 }
 
 .login h1 {
     color: white;
     text-transform: uppercase;
     font-weight: 500;
-    font-size: 24px; /* Increased font size */
+    font-size: 24px;
+    /* Increased font size */
 }
 
 .login input {
     border: 0;
     background: none;
     display: block;
-    margin: 15px auto; /* Increased margin */
+    margin: 15px auto;
+    /* Increased margin */
     text-align: center;
-    border: 3px solid white; /* Increased border size */
-    padding: 18px 15px; /* Increased padding */
-    width: 250px; /* Increased width */
+    border: 3px solid white;
+    /* Increased border size */
+    padding: 18px 15px;
+    /* Increased padding */
+    width: 250px;
+    /* Increased width */
     outline: none;
     color: white;
-    border-radius: 30px; /* Increased border radius */
+    border-radius: 30px;
+    /* Increased border radius */
     transition: 0.25s;
-    font-size: 18px; /* Increased font size */
+    font-size: 18px;
+    /* Increased font size */
 }
 
 .login input:focus {
-    width: 260px; /* Increased width */
+    width: 260px;
+    /* Increased width */
     border-color: #2ecc71;
+}
+
+.login label {
+    color: white;
 }
 
 .login button {
     border: 0;
     background: none;
     display: block;
-    margin: 30px auto; /* Increased margin */
+    margin: 30px auto;
+    /* Increased margin */
     text-align: center;
-    border: 3px solid white; /* Increased border size */
-    padding: 18px 50px; /* Increased padding */
+    border: 3px solid white;
+    /* Increased border size */
+    padding: 18px 50px;
+    /* Increased padding */
     outline: none;
     color: white;
-    border-radius: 30px; /* Increased border radius */
+    border-radius: 30px;
+    /* Increased border radius */
     transition: 0.25s;
     cursor: pointer;
-    font-size: 18px; /* Increased font size */
+    font-size: 18px;
+    /* Increased font size */
 }
 
 .login button:hover {

@@ -12,6 +12,7 @@
   import LeaderBoard from './components/leaderBoard/LeaderBord';
   import Profile from './components/profile/Profile';
   import EditProfile from './components/profile/EditProfile';
+  import GameLog from './components/game/log/GameLog';
 
   function App() {
     const isAuth = localStorage.getItem('user')
@@ -19,14 +20,10 @@
 
     return (
       <div className="App">
-        {/* Set up BrowserRouter for routing */}
         <BrowserRouter>
-          {/* Include the Navbar component for navigation */}
           <SideBar />
           <div className="pages">
-            {/* Define routes for different pages */}
             <Routes>
-              {/* Route for the home page */}
               <Route 
                 path="/"
                 element={<Home />}
@@ -35,17 +32,14 @@
                 path="/leaderboard"
                 element={<LeaderBoard />}
               />
-              {/* Route for the login page */}
               <Route 
                 path="/login" 
                 element={isAuth ? <Navigate to="/" /> : <Login />}
               />
-              {/* Route for the register page */}
               <Route 
                 path="/register" 
                 element={isAuth ? <Navigate to="/" /> : <Register />} 
               />
-              {/* Route for the game board page */}
               <Route 
                 path="/gameboard" 
                 element={<GameBoard />} 
@@ -64,7 +58,11 @@
               />
               <Route 
                 path="/gamesolo" 
-                element={!isAuth ? <Navigate to="/login" /> : <GameSolo />} 
+                element={<GameSolo />} 
+              />
+              <Route 
+                path="/gamelog" 
+                element={!isAuth ? <Navigate to="/login" /> : <GameLog />} 
               />
             </Routes>
           </div>

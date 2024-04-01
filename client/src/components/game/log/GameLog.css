@@ -1,0 +1,64 @@
+.game-log-log {
+    font-family: Arial, sans-serif;
+    color: #ffffff;
+    margin-top: 20px;
+    position: absolute;
+    left: 30%;
+    width: 50%;
+}
+
+h2.log {
+    margin-bottom: 20px;
+}
+
+.card-log {
+    background-color: #15232d;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card-header-log {
+    background-color: #0f1B21;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.card-body-log {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Align items vertically */
+    padding: 20px;
+}
+
+.user-info-log,
+.opponent-info-log {
+    display: flex;
+    align-items: center;
+}
+
+.user-info-log img,
+.opponent-info-log img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info-log p,
+.opponent-info-log p {
+    margin: 5px 100px;
+    /* Add margin to top and bottom */
+}
+
+.outcome-log {
+    text-align: center;
+    display: flex;
+    align-items: center;
+}

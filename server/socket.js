@@ -12,13 +12,11 @@ function socket(io) {
                 const roomName = 'room_' + Math.random().toString(36).substring(7);
                 const players = Array.from(queue.values()).splice(0, 2);
         
-                // Assign 'x' tag to the first player
                 io.to(players[0].id).emit('tag', 'x');
                 players[0].join(roomName);
                 queue.delete(players[0].id);
                 console.log(`User: ${players[0].id} connected to room: ${roomName}`);
         
-                // Assign 'o' tag to the second player
                 io.to(players[1].id).emit('tag', 'o');
                 players[1].join(roomName);
                 queue.delete(players[1].id);

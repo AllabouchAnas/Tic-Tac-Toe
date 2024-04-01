@@ -10,7 +10,6 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 
-// Apply the Socket.IO logic
 socket(io);
 
 app.use(express.json());

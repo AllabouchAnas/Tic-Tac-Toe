@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaGamepad, FaUserFriends, FaTrophy, FaRobot } from 'react-icons/fa';
+import { FaHome, FaUser, FaSignInAlt, FaSignOutAlt, FaGamepad, FaUserFriends, FaTrophy, FaRobot, FaHistory } from 'react-icons/fa';
 import { useLogout } from '../authentication/hooks/useLogout';
 import { useAuthContext } from '../authentication/hooks/useAuthContext';
 import './SideBar.css';
@@ -19,7 +19,6 @@ const SideBar = () => {
     <header>
       <nav className="sidebar">
         <Link to="/" className="logo">
-          {/* <h1>Tic Tac Toe</h1> */}
           <img src={ Logo }></img>
         </Link>
         <div className="sidebar-links">
@@ -37,6 +36,9 @@ const SideBar = () => {
           </Link>
           <Link to="/gamesolo">
             <FaRobot /> Game Solo
+          </Link>
+          <Link to="/gamelog">
+            <FaHistory /> Game Log
           </Link>
         </div>
         {user &&
